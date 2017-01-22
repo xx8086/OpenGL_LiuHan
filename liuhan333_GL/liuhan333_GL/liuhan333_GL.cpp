@@ -93,6 +93,7 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
    ShowWindow(hWnd, nCmdShow);
    UpdateWindow(hWnd);
 
+   lhGL->lhgl_set_fps((function_time)[hWnd](){PostMessage(/*GetActiveWindow()*/hWnd, WM_PAINT, 0, 0);} , 1000 / 32);
    return TRUE;
 }
 
@@ -121,7 +122,8 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     {
         PAINTSTRUCT ps;
         HDC hdc = BeginPaint(hWnd, &ps);
-        lhGL->lhgl_drewsimple();
+        //lhGL->lhgl_drewsimple();
+        lhGL->lhgl_drew();
         SwapBuffers(hdc);
         // TODO: Add any drawing code that uses hdc here...
         EndPaint(hWnd, &ps);

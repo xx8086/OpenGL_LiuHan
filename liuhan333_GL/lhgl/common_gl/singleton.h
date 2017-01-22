@@ -3,7 +3,6 @@
 
 
 template <class T>
-
 class Singleton
 {
 public:

@@ -42,6 +42,21 @@
     <ClInclude Include="common_gl\base_config.h">
       <Filter>common_gl</Filter>
     </ClInclude>
+    <ClInclude Include="common_gl\set_timer.h">
+      <Filter>common_gl</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_util.h">
+      <Filter>common_gl</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_types.h">
+      <Filter>common_gl</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_shardes.h">
+      <Filter>common_gl</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lh_include\lhgl_config.h">
+      <Filter>lh_include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -54,6 +69,15 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="common_gl\lhgl_interface.cpp">
+      <Filter>common_gl</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\set_timer.cpp">
+      <Filter>common_gl</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\lhgl_util.cpp">
+      <Filter>common_gl</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\lhgl_shardes.cpp">
       <Filter>common_gl</Filter>
     </ClCompile>
   </ItemGroup>

@@ -8,6 +8,8 @@
 #include "lhgl.h"
 #include "common_gl\lhgl_interface.h"
 
+using namespace lh_gl_interface;
+
 class ExportLHGL_Plus:
     public ExportLHGL, public Singleton<ExportLHGL_Plus>
 {
@@ -20,6 +22,11 @@ extern "C" DLL_API ExportLHGLInterface* get_lhglinstance()
 {
     ExportLHGLInterface* pInstance = (ExportLHGL*)ExportLHGL_Plus::get_lhinstance();
     return pInstance;
+}
+
+int ExportLHGL::lhgl_set_fps(function_time& bc, int t)
+{
+    return LhGlInterfase::get_lhinstance()->set_fps(bc, t);
 }
 
 bool ExportLHGL::lhgl_initialize(HDC hdc)

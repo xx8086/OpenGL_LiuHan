@@ -90,7 +90,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LHGL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)lh_include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)lh_include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -154,14 +154,22 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lh_include\lhgl.h" />
+    <ClInclude Include="..\lh_include\lhgl_config.h" />
     <ClInclude Include="common_gl\base_config.h" />
     <ClInclude Include="common_gl\lhgl_interface.h" />
+    <ClInclude Include="common_gl\lhgl_shardes.h" />
+    <ClInclude Include="common_gl\lhgl_types.h" />
+    <ClInclude Include="common_gl\lhgl_util.h" />
+    <ClInclude Include="common_gl\set_timer.h" />
     <ClInclude Include="common_gl\singleton.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="common_gl\lhgl_interface.cpp" />
+    <ClCompile Include="common_gl\lhgl_shardes.cpp" />
+    <ClCompile Include="common_gl\lhgl_util.cpp" />
+    <ClCompile Include="common_gl\set_timer.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
