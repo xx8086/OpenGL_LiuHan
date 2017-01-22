@@ -41,5 +41,22 @@ private:
 template <class T> T* Singleton<T>::_s_instance_prt = 0;
 
 
+#define SINGLE_LH(class_name) \
+static class_name * get_lhinstance()\
+{\
+    return &get_instance();\
+}\
+\
+private:\
+    class CGarbo\
+    {\
+    public:\
+        ~CGarbo()\
+        {\
+            destroy_instance();\
+        }\
+    };\
+\
+    static CGarbo Garbo;\
 
 #endif

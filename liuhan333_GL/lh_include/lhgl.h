@@ -9,14 +9,14 @@
 class DLL_API ExportLHGLInterface
 {
 public:
-    virtual int add(int a, int b) = 0;
-    virtual bool Initialize(HDC hDC) = 0;
-    virtual bool DrewSimple() = 0;
-    virtual bool Relese() = 0;
-    virtual bool ReGLSize(unsigned short  width, unsigned short height) = 0;
+    virtual bool lhgl_initialize(HDC) = 0;
+    virtual bool lhgl_drewsimple() = 0;
+    virtual bool lhgl_drew() = 0;
+    virtual bool lhgl_relese() = 0;
+    virtual bool lhgl_resize(unsigned short  width, unsigned short height) = 0;
 };
 
-extern "C" DLL_API ExportLHGLInterface*  getInstance();
+extern "C" DLL_API ExportLHGLInterface*  get_lhglinstance();
 
 #ifdef DLL_EXPORTS
 class ExportLHGL : public ExportLHGLInterface
@@ -24,10 +24,10 @@ class ExportLHGL : public ExportLHGLInterface
 //private:
 //    std::string x; //由于外部代码对此不可见，此处的std::string是安全的。
 public:
-    int add(int a, int b);
-    bool Initialize(HDC hDC);
-    bool DrewSimple();
-    bool Relese();
-    bool ReGLSize(unsigned short  width, unsigned short height);
+    bool lhgl_initialize(HDC);
+    bool lhgl_drew();
+    bool lhgl_drewsimple();
+    bool lhgl_relese();
+    bool lhgl_resize(unsigned short, unsigned short);
 };
 #endif

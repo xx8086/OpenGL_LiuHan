@@ -39,6 +39,9 @@
     <ClInclude Include="common_gl\singleton.h">
       <Filter>common_gl</Filter>
     </ClInclude>
+    <ClInclude Include="common_gl\base_config.h">
+      <Filter>common_gl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">

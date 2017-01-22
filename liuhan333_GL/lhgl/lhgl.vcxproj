@@ -154,6 +154,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\lh_include\lhgl.h" />
+    <ClInclude Include="common_gl\base_config.h" />
     <ClInclude Include="common_gl\lhgl_interface.h" />
     <ClInclude Include="common_gl\singleton.h" />
     <ClInclude Include="stdafx.h" />

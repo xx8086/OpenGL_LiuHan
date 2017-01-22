@@ -8,32 +8,38 @@
 #include "lhgl.h"
 #include "common_gl\lhgl_interface.h"
 
-extern "C" DLL_API ExportLHGLInterface* getInstance()
+class ExportLHGL_Plus:
+    public ExportLHGL, public Singleton<ExportLHGL_Plus>
 {
-    ExportLHGLInterface* pInstance = new ExportLHGL();
+public:
+    virtual ~ExportLHGL_Plus() {};
+    SINGLE_LH(ExportLHGL_Plus)
+};
+
+extern "C" DLL_API ExportLHGLInterface* get_lhglinstance()
+{
+    ExportLHGLInterface* pInstance = (ExportLHGL*)ExportLHGL_Plus::get_lhinstance();
     return pInstance;
 }
 
-int ExportLHGL::add(int a, int b)
+bool ExportLHGL::lhgl_initialize(HDC hdc)
 {
-    //do something...
-    return a + b;
+    return LhGlInterfase::get_lhinstance()->initialize(hdc);
 }
-
-bool ExportLHGL::Initialize(HDC hDC)
+bool ExportLHGL::lhgl_drew()
 {
-    return LhGlInterfase::GetInstance()->Initialize(hDC);
+    return LhGlInterfase::get_lhinstance()->drew();
 }
-bool ExportLHGL::DrewSimple()
+bool ExportLHGL::lhgl_drewsimple()
 {
-    return LhGlInterfase::GetInstance()->DrewSimple();
+    return LhGlInterfase::get_lhinstance()->drewsimple();
 }
-bool ExportLHGL::Relese()
+bool ExportLHGL::lhgl_relese()
 {
-    return LhGlInterfase::GetInstance()->Relese();
+    return LhGlInterfase::get_lhinstance()->relese();
 }
-bool ExportLHGL::ReGLSize(unsigned short  width, unsigned short height)
+bool ExportLHGL::lhgl_resize(unsigned short  width, unsigned short height)
 {
-    return LhGlInterfase::GetInstance()->ReGLSize(width, height);
+    return LhGlInterfase::get_lhinstance()->resize(width, height);
 }
 

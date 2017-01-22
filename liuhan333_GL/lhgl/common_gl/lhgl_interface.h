@@ -2,39 +2,27 @@
 #include <Windows.h>
 #include "singleton.h"
 
+
+
 class LhGlInterfase:
     public Singleton<LhGlInterfase>
 {
 public:
     LhGlInterfase();
-	virtual ~LhGlInterfase();
-    static LhGlInterfase * GetInstance()
-    {
-        return &get_instance();
-    }
-
-private:
-    class CGarbo
-    {
-    public:
-        ~CGarbo()
-        {
-            destroy_instance();
-        }
-    };
-
-    static CGarbo Garbo;
+    virtual ~LhGlInterfase();
+    SINGLE_LH(LhGlInterfase)
 public:
-	bool Initialize(HDC hDC);
-	bool DrewSimple();
-	bool Relese();
-	bool ReGLSize(unsigned short  width, unsigned short height);
+	bool initialize(HDC);
+    bool drew();
+	bool drewsimple();
+	bool relese();
+	bool resize(unsigned short, unsigned short);
 private:
-	bool SetPixel(HDC hDC);
-	bool SetGLContext(HDC hDC);
-	bool InitGL();
+	bool set_pixel(HDC);
+	bool set_glcontext(HDC);
+	bool init_gl();
 
 private:
-	HGLRC hRC = nullptr;
+	HGLRC hrc = nullptr;
 };
 

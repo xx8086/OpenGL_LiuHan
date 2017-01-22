@@ -2,8 +2,8 @@
 #include "lhgl_interface.h"
 #include "GL\glew.h"
 #include "glut.h"
+#include "base_config.h"
 
-#define FALSE_RT(a,t) if(!a){return t;}
 
 LhGlInterfase::LhGlInterfase()
 {}
@@ -12,7 +12,7 @@ LhGlInterfase::~LhGlInterfase()
 {}
 
 
-bool LhGlInterfase::SetPixel(HDC hDC)
+bool LhGlInterfase::set_pixel(HDC hdc)
 {
 	static	PIXELFORMATDESCRIPTOR pfd =				// pfd Tells Windows How We Want Things To Be
 	{
@@ -36,20 +36,20 @@ bool LhGlInterfase::SetPixel(HDC hDC)
 		0, 0, 0										// Layer Masks Ignored
 	};
 
-	unsigned int	PixelFormat;
-	FALSE_RT((PixelFormat = ChoosePixelFormat(hDC, &pfd)), false)
-	FALSE_RT(SetPixelFormat(hDC, PixelFormat, &pfd), false)
+	unsigned int pixelformat;
+	FALSE_RT((pixelformat = ChoosePixelFormat(hdc, &pfd)), false)
+	FALSE_RT(SetPixelFormat(hdc, pixelformat, &pfd), false)
 	return true;
 }
 
-bool LhGlInterfase::SetGLContext(HDC hDC)
+bool LhGlInterfase::set_glcontext(HDC hdc)
 {
-	FALSE_RT((hRC = wglCreateContext(hDC)), false);
-	FALSE_RT(wglMakeCurrent(hDC, hRC), false);
+	FALSE_RT((hrc = wglCreateContext(hdc)), false);
+	FALSE_RT(wglMakeCurrent(hdc, hrc), false);
 	return true;
 }
 
-bool LhGlInterfase::InitGL()
+bool LhGlInterfase::init_gl()
 {
 	glShadeModel(GL_SMOOTH);							// Enable Smooth Shading
 	glClearColor(0.0f, 0.0f, 0.0f, 0.5f);				// Black Background
@@ -60,15 +60,20 @@ bool LhGlInterfase::InitGL()
 	return true;
 }
 
-bool LhGlInterfase::Initialize(HDC hDC)
+bool LhGlInterfase::initialize(HDC hdc)
 {
-	FALSE_RT(SetPixel(hDC), false);
-	FALSE_RT(SetGLContext(hDC), false);
-	InitGL();
+	FALSE_RT(set_pixel(hdc), false);
+	FALSE_RT(set_glcontext(hdc), false);
+    init_gl();
 	return true;
 }
 
-bool LhGlInterfase::DrewSimple()
+bool LhGlInterfase::drew()
+{
+    return true;
+}
+
+bool LhGlInterfase::drewsimple()
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);	// Clear Screen And Depth Buffer
 	glLoadIdentity();									// Reset The Current Modelview Matrix
@@ -99,19 +104,19 @@ bool LhGlInterfase::DrewSimple()
 }
 
 
-bool LhGlInterfase::Relese()
+bool LhGlInterfase::relese()
 {
-	if (hRC)
+	if (hrc)
 	{
 		wglMakeCurrent(nullptr, nullptr);
-		wglDeleteContext(hRC);
-		hRC = nullptr;
+		wglDeleteContext(hrc);
+        hrc = nullptr;
 	}
 	return true;
 }
 
 
-bool LhGlInterfase::ReGLSize(unsigned short  width, unsigned short height)
+bool LhGlInterfase::resize(unsigned short  width, unsigned short height)
 {
 	glViewport(0, 0, width, height);						// Reset The Current Viewport
 
