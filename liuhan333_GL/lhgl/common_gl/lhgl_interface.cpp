@@ -65,26 +65,12 @@ namespace lh_gl_interface {
         return true;
     }
 
-    bool LhGlInterfase::init_sharde()
-    {
-        bool rt = false;
-        if (shardes.init())
-        {
-            shardes.set_vs_filename("..\\shardes\\shader.vs");
-            shardes.set_fs_filename("..\\shardes\\shader.fs");
-            shardes.create_vertex_buffer();
-            rt = shardes.compile_shaders();
-        }
-
-        return rt;
-    }
-
     bool LhGlInterfase::initialize(HDC hdc)
     {
         FALSE_RT(set_pixel(hdc), false);
         FALSE_RT(set_glcontext(hdc), false);
         //FALSE_RT(init_gl(), false);
-        FALSE_RT(init_sharde(), false);
+        FALSE_RT(shardes.glsharde_init(), false);
         return true;
     }
 
@@ -124,7 +110,6 @@ namespace lh_gl_interface {
         return true;
     }
 
-
     bool LhGlInterfase::relese()
     {
         if (hrc)
@@ -135,7 +120,6 @@ namespace lh_gl_interface {
         }
         return true;
     }
-
 
     bool LhGlInterfase::resize(unsigned short  width, unsigned short height)
     {

@@ -23,11 +23,10 @@ namespace lh_gl_interface {
         bool set_pixel(HDC);
         bool set_glcontext(HDC);
         bool init_gl();
-        bool init_sharde();
 
     private:
         HGLRC hrc = nullptr;
         lh_time::CTimer timer;
-        lh_gl::CShardes shardes;
+        lh_gl_sharde::CShardes shardes;
     };
 }

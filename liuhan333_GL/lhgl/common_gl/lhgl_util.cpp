@@ -98,6 +98,23 @@ namespace lh_gl {
     }
 #endif
 
+    void lhgl_msg(const char* title, const char* format, ...)
+    {
+        char msg[MSG_BUFFER_LEN];
+        va_list args;
+        va_start(args, format);
+        VSNPRINTF(msg, sizeof(msg), format, args);
+        va_end(args);
+
+#ifdef WIN32 
+        char msg2[MSG_BUFFER_LEN];
+        _snprintf_s(msg2, sizeof(msg2), "%s", msg);
+        MessageBoxA(NULL, msg2, title, 0);
+#else
+        fprintf(stderr, "%s", msg);
+#endif   
+    }
+
     void lhgl_error(const char* filename, uint line, const char* format, ...)
     {
         char msg[MSG_BUFFER_LEN];

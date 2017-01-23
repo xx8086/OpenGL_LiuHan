@@ -57,6 +57,9 @@
     <ClInclude Include="..\lh_include\lhgl_config.h">
       <Filter>lh_include</Filter>
     </ClInclude>
+    <ClInclude Include="common_gl\lhsharde.h">
+      <Filter>common_gl</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -80,5 +83,16 @@
     <ClCompile Include="common_gl\lhgl_shardes.cpp">
       <Filter>common_gl</Filter>
     </ClCompile>
+    <ClCompile Include="common_gl\lhsharde.cpp">
+      <Filter>common_gl</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shardes\shader.vs">
+      <Filter>Resource Files</Filter>
+    </None>
+    <None Include="..\shardes\shader.fs">
+      <Filter>Resource Files</Filter>
+    </None>
   </ItemGroup>
 </Project>

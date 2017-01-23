@@ -160,6 +160,7 @@
     <ClInclude Include="common_gl\lhgl_shardes.h" />
     <ClInclude Include="common_gl\lhgl_types.h" />
     <ClInclude Include="common_gl\lhgl_util.h" />
+    <ClInclude Include="common_gl\lhsharde.h" />
     <ClInclude Include="common_gl\set_timer.h" />
     <ClInclude Include="common_gl\singleton.h" />
     <ClInclude Include="stdafx.h" />
@@ -169,6 +170,7 @@
     <ClCompile Include="common_gl\lhgl_interface.cpp" />
     <ClCompile Include="common_gl\lhgl_shardes.cpp" />
     <ClCompile Include="common_gl\lhgl_util.cpp" />
+    <ClCompile Include="common_gl\lhsharde.cpp" />
     <ClCompile Include="common_gl\set_timer.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
@@ -186,6 +188,10 @@
     </ClCompile>
     <ClCompile Include="lhgl.cpp" />
     <ClCompile Include="stdafx.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\shardes\shader.fs" />
+    <None Include="..\shardes\shader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

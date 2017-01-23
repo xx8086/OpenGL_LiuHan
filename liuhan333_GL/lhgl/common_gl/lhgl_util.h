@@ -1,4 +1,4 @@
-#ifndef LHGL_UTIL_H
+﻿#ifndef LHGL_UTIL_H
 #define	LHGL_UTIL_H
 
 #ifndef WIN32
@@ -18,9 +18,11 @@ namespace lh_gl {
     bool read_file(const char* , string& );
     bool read_binaryfile(const char* , std::vector<int>& );
 
+    void lhgl_msg(const char*, const char*, ...);
     void lhgl_error(const char* , uint , const char* , ...);
     void lhgl_file_error(const char* , uint , const char* );
 
+#define LHGL_MSG(title, msg) lhgl_msg(title, msg)
 #define LHGL_ERROR0(msg) lhgl_error(__FILE__, __LINE__, msg)
 #define LHGL_ERROR(msg, ...) lhgl_error(__FILE__, __LINE__, msg, __VA_ARGS__)
 #define LHGL_FILE_ERROR(FileError) lhgl_file_error(__FILE__, __LINE__, FileError);
