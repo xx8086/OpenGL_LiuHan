@@ -12,6 +12,8 @@
 *.opensdf
 *.VC
 *.db
+*.pch
+*.res
 
 *.exe
 *.lib
