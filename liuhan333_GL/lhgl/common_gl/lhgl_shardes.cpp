@@ -28,9 +28,9 @@ namespace lh_gl_sharde {
 
         // 旋转变换矩阵
         float world[16] = {
-        cosf(Scale),    -sinf(Scale),   0.0f,       0.0f,
-        sinf(Scale),    cosf(Scale),    0.0f,       0.0f,
-        0.0f,           0.0f,           1.0f,       0.0f,
+        cosf(Scale),    0.0f,   -sinf(Scale),       0.0f,
+        0.0f,           1.0f,           0.0f,       0.0f,
+        sinf(Scale),    0.0f,    cosf(Scale),       0.0f,
         0.0f,           0.0f,           0.0f,       1.0f};
 
         glUniformMatrix4fv(world_location, 1, GL_TRUE, world);
@@ -66,15 +66,18 @@ namespace lh_gl_sharde {
     {
         glClear(GL_COLOR_BUFFER_BIT);
 
-        render_triangle();
+        //render_triangle();
         //render_translation();
-        //render_rotate();
+        render_rotate();
         //render_scale();
 
         glEnableVertexAttribArray(0);
         //glBindBuffer(GL_ARRAY_BUFFER, vbo);
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-        glDrawArrays(GL_TRIANGLES, 0, 3);
+
+        //glDrawArrays(GL_TRIANGLES, 0, 3);
+        glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
+
         glDisableVertexAttribArray(0);
         //glutSwapBuffers();
     }
@@ -85,19 +88,35 @@ namespace lh_gl_sharde {
         set_vs_filename("..\\shardes\\shader.vs");
         set_fs_filename("..\\shardes\\shader.fs");
         create_vertex_buffer();
+        create_index_buffer();
         return do_sharde();
+    }
+
+
+    void CShardes::create_index_buffer()
+    {
+        // 四个三角形面的顶点索引集
+        unsigned int indices[] = { 
+            0, 3, 1,
+            1, 3, 2,
+            2, 3, 0,
+            0, 1, 2 };
+        glGenBuffers(1, &ibo);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
     }
 
     void CShardes::create_vertex_buffer()
     {
-        float vertices[9] = {
+        float vertices[12] = {
             -1.0f, -1.0f, 0.0f,
+            0.0f, -1.0f, 1.0f,
             1.0f, -1.0f, 0.0f,
             0.0f, 1.0f, 0.0f };
 
         glGenBuffers(1, &vbo);
         glBindBuffer(GL_ARRAY_BUFFER, vbo);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(float)*9, vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(float)*12, vertices, GL_STATIC_DRAW);
     }
 
     bool CShardes::do_sharde()

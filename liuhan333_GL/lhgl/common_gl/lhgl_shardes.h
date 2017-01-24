@@ -13,6 +13,7 @@ namespace lh_gl_sharde {
         virtual ~CShardes();
     public:
         bool glsharde_init();
+        void create_index_buffer();
         void create_vertex_buffer();
         void render_scene();
         
@@ -23,6 +24,7 @@ namespace lh_gl_sharde {
         void render_triangle();
         bool do_sharde();
     private:
+        GLuint ibo;
         GLuint vbo;
         GLuint shader_program;
         GLuint scale_location;
