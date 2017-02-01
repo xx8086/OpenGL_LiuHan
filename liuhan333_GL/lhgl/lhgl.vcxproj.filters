@@ -19,6 +19,15 @@
     <Filter Include="common_gl">
       <UniqueIdentifier>{1104595b-657f-445e-bea9-2c2a1177b8ae}</UniqueIdentifier>
     </Filter>
+    <Filter Include="common_gl\common_include">
+      <UniqueIdentifier>{649d6a00-bee4-4e19-bc10-8f72805e5bc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common_gl\common_gl_include">
+      <UniqueIdentifier>{14de01c1-fad0-4793-8815-d8b3837b117d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="common_gl\common_gl_source">
+      <UniqueIdentifier>{76a472c5-2621-4906-ba8d-219e8cba8ae5}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -33,32 +42,56 @@
     <ClInclude Include="..\lh_include\lhgl.h">
       <Filter>lh_include</Filter>
     </ClInclude>
-    <ClInclude Include="common_gl\lhgl_interface.h">
-      <Filter>common_gl</Filter>
-    </ClInclude>
-    <ClInclude Include="common_gl\singleton.h">
-      <Filter>common_gl</Filter>
-    </ClInclude>
-    <ClInclude Include="common_gl\base_config.h">
-      <Filter>common_gl</Filter>
-    </ClInclude>
-    <ClInclude Include="common_gl\set_timer.h">
-      <Filter>common_gl</Filter>
-    </ClInclude>
-    <ClInclude Include="common_gl\lhgl_util.h">
-      <Filter>common_gl</Filter>
-    </ClInclude>
-    <ClInclude Include="common_gl\lhgl_types.h">
-      <Filter>common_gl</Filter>
-    </ClInclude>
-    <ClInclude Include="common_gl\lhgl_shardes.h">
-      <Filter>common_gl</Filter>
-    </ClInclude>
     <ClInclude Include="..\lh_include\lhgl_config.h">
       <Filter>lh_include</Filter>
     </ClInclude>
+    <ClInclude Include="common_gl\base_config.h">
+      <Filter>common_gl\common_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_interface.h">
+      <Filter>common_gl\common_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_shardes.h">
+      <Filter>common_gl\common_include</Filter>
+    </ClInclude>
     <ClInclude Include="common_gl\lhsharde.h">
-      <Filter>common_gl</Filter>
+      <Filter>common_gl\common_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_keys.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_lights_common.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_math.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_pipeline.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_camera.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_basic_lights.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_atb.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_technique.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_types.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\lhgl_util.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\set_timer.h">
+      <Filter>common_gl\common_include</Filter>
+    </ClInclude>
+    <ClInclude Include="common_gl\singleton.h">
+      <Filter>common_gl\common_include</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -71,20 +104,38 @@
     <ClCompile Include="dllmain.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="common_gl\lhgl_camera.cpp">
+      <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
     <ClCompile Include="common_gl\lhgl_interface.cpp">
-      <Filter>common_gl</Filter>
+      <Filter>common_gl\common_gl_source</Filter>
     </ClCompile>
-    <ClCompile Include="common_gl\set_timer.cpp">
-      <Filter>common_gl</Filter>
-    </ClCompile>
-    <ClCompile Include="common_gl\lhgl_util.cpp">
-      <Filter>common_gl</Filter>
+    <ClCompile Include="common_gl\lhgl_pipeline.cpp">
+      <Filter>common_gl\common_gl_source</Filter>
     </ClCompile>
     <ClCompile Include="common_gl\lhgl_shardes.cpp">
-      <Filter>common_gl</Filter>
+      <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\lhgl_util.cpp">
+      <Filter>common_gl\common_gl_source</Filter>
     </ClCompile>
     <ClCompile Include="common_gl\lhsharde.cpp">
-      <Filter>common_gl</Filter>
+      <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\set_timer.cpp">
+      <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\lhgl_math.cpp">
+      <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\lhgl_basic_lights.cpp">
+      <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\lhgl_technique.cpp">
+      <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\lhgl_atb.cpp">
+      <Filter>common_gl\common_gl_source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
