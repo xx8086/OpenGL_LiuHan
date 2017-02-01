@@ -3,8 +3,8 @@
 #include "lhgl_math.h"
 
 namespace lh_gl {
-    TwType TW_TYPE_OGLDEV_VECTOR3F;
-    TwType TW_TYPE_OGLDEV_ATTENUATION;
+    TwType TW_TYPE_LHGL_VECTOR3F;
+    TwType TW_TYPE_LHGL_ATTENUATION;
 
     ATB::ATB()
     {
@@ -24,7 +24,7 @@ namespace lh_gl {
                 { "z", TW_TYPE_FLOAT, offsetof(Vector3f, z), "" }
             };
 
-            TW_TYPE_OGLDEV_VECTOR3F = TwDefineStruct("Vector3f", Vector3fMembers, 3, sizeof(Vector3f), NULL, NULL);
+            TW_TYPE_LHGL_VECTOR3F = TwDefineStruct("Vector3f", Vector3fMembers, 3, sizeof(Vector3f), NULL, NULL);
 
             TwStructMember AttenuationMembers[] = {
                 { "Const", TW_TYPE_FLOAT, offsetof(LightAttenuation, Constant), "" },
@@ -32,7 +32,7 @@ namespace lh_gl {
                 { "Exp", TW_TYPE_FLOAT, offsetof(LightAttenuation, Exp), "" }
             };
 
-            TW_TYPE_OGLDEV_ATTENUATION = TwDefineStruct("Attenuation", AttenuationMembers, 3, sizeof(LightAttenuation), NULL, NULL);
+            TW_TYPE_LHGL_ATTENUATION = TwDefineStruct("Attenuation", AttenuationMembers, 3, sizeof(LightAttenuation), NULL, NULL);
 
             ret = true;
         }
@@ -41,68 +41,68 @@ namespace lh_gl {
     }
 
 
-    static int OgldevKeyToATBKey(OGLDEV_KEY OgldevKey)
+    static int OgldevKeyToATBKey(LHGL_KEY OgldevKey)
     {
-        if (OgldevKey >= OGLDEV_KEY_SPACE && OgldevKey <= OGLDEV_KEY_RIGHT_BRACKET) {
+        if (OgldevKey >= LHGL_KEY_SPACE && OgldevKey <= LHGL_KEY_RIGHT_BRACKET) {
             return OgldevKey;
         }
 
         switch (OgldevKey) {
 
-        case OGLDEV_KEY_BACKSPACE:
+        case LHGL_KEY_BACKSPACE:
             return TW_KEY_BACKSPACE;
-        case OGLDEV_KEY_TAB:
+        case LHGL_KEY_TAB:
             return TW_KEY_TAB;
             //            return TW_KEY_CLEAR;
-        case OGLDEV_KEY_ENTER:
+        case LHGL_KEY_ENTER:
             return TW_KEY_RETURN;
 
             //return TW_KEY_PAUSE;
-        case OGLDEV_KEY_ESCAPE:
+        case LHGL_KEY_ESCAPE:
             return TW_KEY_ESCAPE;
-        case OGLDEV_KEY_DELETE:
+        case LHGL_KEY_DELETE:
             return TW_KEY_DELETE;
-        case OGLDEV_KEY_UP:
+        case LHGL_KEY_UP:
             return TW_KEY_UP;
-        case OGLDEV_KEY_DOWN:
+        case LHGL_KEY_DOWN:
             return TW_KEY_DOWN;
-        case OGLDEV_KEY_RIGHT:
+        case LHGL_KEY_RIGHT:
             return TW_KEY_RIGHT;
-        case OGLDEV_KEY_LEFT:
+        case LHGL_KEY_LEFT:
             return TW_KEY_LEFT;
-        case OGLDEV_KEY_INSERT:
+        case LHGL_KEY_INSERT:
             return TW_KEY_INSERT;
-        case OGLDEV_KEY_HOME:
+        case LHGL_KEY_HOME:
             return TW_KEY_HOME;
-        case OGLDEV_KEY_END:
+        case LHGL_KEY_END:
             return TW_KEY_END;
-        case OGLDEV_KEY_PAGE_UP:
+        case LHGL_KEY_PAGE_UP:
             return TW_KEY_PAGE_UP;
-        case OGLDEV_KEY_PAGE_DOWN:
+        case LHGL_KEY_PAGE_DOWN:
             return TW_KEY_PAGE_DOWN;
-        case OGLDEV_KEY_F1:
+        case LHGL_KEY_F1:
             return TW_KEY_F1;
-        case OGLDEV_KEY_F2:
+        case LHGL_KEY_F2:
             return TW_KEY_F2;
-        case OGLDEV_KEY_F3:
+        case LHGL_KEY_F3:
             return TW_KEY_F3;
-        case OGLDEV_KEY_F4:
+        case LHGL_KEY_F4:
             return TW_KEY_F4;
-        case OGLDEV_KEY_F5:
+        case LHGL_KEY_F5:
             return TW_KEY_F5;
-        case OGLDEV_KEY_F6:
+        case LHGL_KEY_F6:
             return TW_KEY_F6;
-        case OGLDEV_KEY_F7:
+        case LHGL_KEY_F7:
             return TW_KEY_F7;
-        case OGLDEV_KEY_F8:
+        case LHGL_KEY_F8:
             return TW_KEY_F8;
-        case OGLDEV_KEY_F9:
+        case LHGL_KEY_F9:
             return TW_KEY_F9;
-        case OGLDEV_KEY_F10:
+        case LHGL_KEY_F10:
             return TW_KEY_F10;
-        case OGLDEV_KEY_F11:
+        case LHGL_KEY_F11:
             return TW_KEY_F11;
-        case OGLDEV_KEY_F12:
+        case LHGL_KEY_F12:
             return TW_KEY_F12;
         default:
             LHGL_ERROR0("Unimplemented OGLDEV to ATB key");
@@ -111,7 +111,7 @@ namespace lh_gl {
         return TW_KEY_LAST;
     }
 
-    bool ATB::KeyboardCB(OGLDEV_KEY OgldevKey)
+    bool ATB::KeyboardCB(LHGL_KEY OgldevKey)
     {
         int ATBKey = OgldevKeyToATBKey(OgldevKey);
 
@@ -129,10 +129,10 @@ namespace lh_gl {
     }
 
 
-    bool ATB::MouseCB(OGLDEV_MOUSE Button, OGLDEV_KEY_STATE State, int x, int y)
+    bool ATB::MouseCB(LHGL_MOUSE Button, LHGL_KEY_STATE State, int x, int y)
     {
-        TwMouseButtonID btn = (Button == OGLDEV_MOUSE_BUTTON_LEFT) ? TW_MOUSE_LEFT : TW_MOUSE_RIGHT;
-        TwMouseAction ma = (State == OGLDEV_KEY_STATE_PRESS) ? TW_MOUSE_PRESSED : TW_MOUSE_RELEASED;
+        TwMouseButtonID btn = (Button == LHGL_MOUSE_BUTTON_LEFT) ? TW_MOUSE_LEFT : TW_MOUSE_RIGHT;
+        TwMouseAction ma = (State == LHGL_KEY_STATE_PRESS) ? TW_MOUSE_PRESSED : TW_MOUSE_RELEASED;
 
         return (TwMouseButton(ma, btn) == 1);
     }

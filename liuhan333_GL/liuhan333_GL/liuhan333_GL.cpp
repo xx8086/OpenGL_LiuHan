@@ -136,6 +136,24 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
         ReleaseDC(hWnd, pDC);
     }
     break;
+    case WM_CHAR:
+        lhGL->lhgl_keyborad(true, wParam, lParam);
+        break;
+    case WM_KEYDOWN:
+    {
+        if(VK_PROCESSKEY != wParam &&
+            !(0x41 <= wParam && wParam <= 0x5A) &&//A-Z
+            !(0x30 <= wParam && wParam <= 0x39))//0-9
+        {
+            lhGL->lhgl_keyborad(false, wParam, lParam);
+        }
+    }
+    break;
+    case WM_MOUSEMOVE:
+    {
+        lhGL->lhgl_mosuemove(LOWORD(lParam), HIWORD(lParam), (unsigned int)wParam);
+    }
+    break;
     case WM_SIZE:
     {
         lhGL->lhgl_resize(LOWORD(lParam), HIWORD(lParam));

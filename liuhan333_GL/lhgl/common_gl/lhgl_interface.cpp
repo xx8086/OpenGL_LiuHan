@@ -134,4 +134,14 @@ namespace lh_gl_interface {
         glLoadIdentity();									// Reset The Modelview Matrix
         return true;
     }
+
+    bool LhGlInterfase::lhgl_keyborad(bool bchar, unsigned int virtual_key, unsigned int utype)
+    {
+        return shardes.specialkeyboard(bchar, virtual_key, utype);
+    }
+
+    bool LhGlInterfase::lhgl_mosuemove(unsigned int x, unsigned int y, unsigned int mark)
+    {
+        return  shardes.onmouse(mark, x, y);
+    }
 }

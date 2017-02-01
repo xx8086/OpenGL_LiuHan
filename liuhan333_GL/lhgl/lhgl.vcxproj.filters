@@ -93,6 +93,9 @@
     <ClInclude Include="common_gl\singleton.h">
       <Filter>common_gl\common_include</Filter>
     </ClInclude>
+    <ClInclude Include="common_gl\lhgl_key_trans.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -136,6 +139,9 @@
     </ClCompile>
     <ClCompile Include="common_gl\lhgl_atb.cpp">
       <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\lhgl_key_trans.cpp">
+      <Filter>common_gl\common_gl_include</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

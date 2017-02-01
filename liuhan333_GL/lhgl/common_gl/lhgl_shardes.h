@@ -22,7 +22,9 @@ namespace lh_gl_sharde {
         void create_index_buffer();
         void create_vertex_buffer();
         void render_scene();
-        
+    public:
+        bool onmouse(unsigned int mark, unsigned int x, unsigned int y);
+        bool specialkeyboard(bool, unsigned int, unsigned int);
     private:
         void render_bypipe();
         void render_translation();

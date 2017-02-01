@@ -50,3 +50,14 @@ bool ExportLHGL::lhgl_resize(unsigned short  width, unsigned short height)
     return LhGlInterfase::get_lhinstance()->resize(width, height);
 }
 
+bool ExportLHGL::lhgl_keyborad(bool bchar, unsigned int virtual_key, unsigned int utype)
+{
+    return LhGlInterfase::get_lhinstance()->lhgl_keyborad(bchar, virtual_key, utype);
+}
+
+bool ExportLHGL::lhgl_mosuemove(unsigned int x, unsigned int y, unsigned int mark)
+{
+    return LhGlInterfase::get_lhinstance()->lhgl_mosuemove(x, y, mark);
+}
+
+

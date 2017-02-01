@@ -13,18 +13,18 @@ namespace lh_gl {
 
         bool Init();
 
-        bool KeyboardCB(OGLDEV_KEY OgldevKey);
+        bool KeyboardCB(LHGL_KEY OgldevKey);
 
         bool PassiveMouseCB(int x, int y);
 
         void RenderSceneCB();
 
-        bool MouseCB(OGLDEV_MOUSE Button, OGLDEV_KEY_STATE State, int x, int y);
+        bool MouseCB(LHGL_MOUSE Button, LHGL_KEY_STATE State, int x, int y);
 
     };
 
 
-    extern TwType TW_TYPE_OGLDEV_VECTOR3F;
-    extern TwType TW_TYPE_OGLDEV_ATTENUATION;
+    extern TwType TW_TYPE_LHGL_VECTOR3F;
+    extern TwType TW_TYPE_LHGL_ATTENUATION;
 }
 #endif

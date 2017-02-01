@@ -30,9 +30,9 @@ namespace lh_gl {
     {
         BaseLight::AddToATB(bar);
         std::string s = Name + ".Position";
-        TwAddVarRW(bar, s.c_str(), TW_TYPE_OGLDEV_VECTOR3F, &Position, "axisz=-z");
+        TwAddVarRW(bar, s.c_str(), TW_TYPE_LHGL_VECTOR3F, &Position, "axisz=-z");
         s = Name + ".Attenuation";
-        TwAddVarRW(bar, s.c_str(), TW_TYPE_OGLDEV_ATTENUATION, &Attenuation, "");
+        TwAddVarRW(bar, s.c_str(), TW_TYPE_LHGL_ATTENUATION, &Attenuation, "");
     }
 
 

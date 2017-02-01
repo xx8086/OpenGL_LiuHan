@@ -168,6 +168,7 @@
     <ClInclude Include="common_gl\lhgl_technique.h" />
     <ClInclude Include="common_gl\lhgl_types.h" />
     <ClInclude Include="common_gl\lhgl_util.h" />
+    <ClInclude Include="common_gl\lhgl_key_trans.h" />
     <ClInclude Include="common_gl\lhsharde.h" />
     <ClInclude Include="common_gl\set_timer.h" />
     <ClInclude Include="common_gl\singleton.h" />
@@ -183,6 +184,7 @@
     <ClCompile Include="common_gl\lhgl_shardes.cpp" />
     <ClCompile Include="common_gl\lhgl_atb.cpp" />
     <ClCompile Include="common_gl\lhgl_util.cpp" />
+    <ClCompile Include="common_gl\lhgl_key_trans.cpp" />
     <ClCompile Include="common_gl\lhsharde.cpp" />
     <ClCompile Include="common_gl\set_timer.cpp" />
     <ClCompile Include="common_gl\lhgl_technique.cpp" />

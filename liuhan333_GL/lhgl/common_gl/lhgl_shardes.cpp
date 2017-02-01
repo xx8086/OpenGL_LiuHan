@@ -1,6 +1,8 @@
 ﻿#include "lhgl_shardes.h"
 #include "glm.hpp"
 #include "lhgl_pipeline.h"
+#include "glut.h"
+#include "lhgl_key_trans.h"
 
 namespace lh_gl_sharde {
     using namespace lh_gl;
@@ -48,6 +50,23 @@ namespace lh_gl_sharde {
             game_camera = nullptr;
         }
     }
+
+
+    bool CShardes::onmouse(unsigned int mark, unsigned int x, unsigned int y)
+    {
+        bool rt = false;
+        if(lh_mouse_move(mark))
+        {
+            rt = game_camera->om_mouse((int)x, (int)y);
+        }
+        return rt;
+    }
+
+    bool CShardes::specialkeyboard(bool bchar, unsigned int uchar, unsigned int utype)
+    {
+        return game_camera->on_keyboard(lh_to_glkey(bchar, uchar));
+    }
+
     void CShardes::render_bypipe()
     {
         fscale += 0.01f;
@@ -131,7 +150,6 @@ namespace lh_gl_sharde {
         create_vertex_buffer();
         create_index_buffer();
         init_projection();
-
         return do_sharde();
     }
 

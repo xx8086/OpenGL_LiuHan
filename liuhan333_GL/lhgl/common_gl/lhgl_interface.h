@@ -19,6 +19,8 @@ namespace lh_gl_interface {
         bool drewsimple();
         bool relese();
         bool resize(unsigned short, unsigned short);
+        bool lhgl_keyborad(bool, unsigned int, unsigned int);
+        bool lhgl_mosuemove(unsigned int, unsigned int, unsigned int);
     private:
         bool set_pixel(HDC);
         bool set_glcontext(HDC);

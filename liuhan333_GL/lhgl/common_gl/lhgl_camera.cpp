@@ -1,4 +1,4 @@
-#include "lhgl_camera.h"
+﻿#include "lhgl_camera.h"
 
 namespace lh_gl {
 
@@ -76,27 +76,30 @@ namespace lh_gl {
     }
 
 
-    bool Camera::OnKeyboard(OGLDEV_KEY Key)
+    bool Camera::on_keyboard(LHGL_KEY Key)
     {
         bool Ret = false;
-
-        switch (Key) {
-
-        case OGLDEV_KEY_UP:
+        switch (Key) 
+        {
+        case LHGL_KEY_UP:
+        case LHGL_KEY_W:
+        case LHGL_KEY_w:
         {
             m_pos += (m_target * STEP_SCALE);
             Ret = true;
         }
         break;
-
-        case OGLDEV_KEY_DOWN:
+        case LHGL_KEY_DOWN:
+        case LHGL_KEY_S:
+        case LHGL_KEY_s:
         {
             m_pos -= (m_target * STEP_SCALE);
             Ret = true;
         }
         break;
-
-        case OGLDEV_KEY_LEFT:
+        case LHGL_KEY_LEFT:
+        case LHGL_KEY_A:
+        case LHGL_KEY_a:
         {
             Vector3f Left = m_target.Cross(m_up);
             Left.Normalize();
@@ -105,8 +108,9 @@ namespace lh_gl {
             Ret = true;
         }
         break;
-
-        case OGLDEV_KEY_RIGHT:
+        case LHGL_KEY_RIGHT:
+        case LHGL_KEY_D:
+        case LHGL_KEY_d:
         {
             Vector3f Right = m_up.Cross(m_target);
             Right.Normalize();
@@ -115,27 +119,25 @@ namespace lh_gl {
             Ret = true;
         }
         break;
-
-        case OGLDEV_KEY_PAGE_UP:
+        case LHGL_KEY_PAGE_UP:
             m_pos.y += STEP_SCALE;
             break;
 
-        case OGLDEV_KEY_PAGE_DOWN:
+        case LHGL_KEY_PAGE_DOWN:
             m_pos.y -= STEP_SCALE;
             break;
 
         default:
             break;
         }
-
         return Ret;
     }
 
 
-    void Camera::OnMouse(int x, int y)
+    bool Camera::om_mouse(int x, int y)
     {
-        const int DeltaX = x - m_mousePos.x;
-        const int DeltaY = y - m_mousePos.y;
+        const int DeltaX = m_mousePos.x - x;
+        const int DeltaY = m_mousePos.y - y;
 
         m_mousePos.x = x;
         m_mousePos.y = y;
@@ -172,6 +174,7 @@ namespace lh_gl {
         }
 
         Update();
+        return true;
     }
 
 
@@ -208,22 +211,27 @@ namespace lh_gl {
 
     void Camera::Update()
     {
-        const Vector3f Vaxis(0.0f, 1.0f, 0.0f);
+//       y^   ^z
+//        |  /
+//        | /
+//  -----0/---->x
+//       /|
+//      / | 
+//默认相机朝向z轴正方向,右边是x轴正方向,up就是y轴正方向。
+        const Vector3f vaxis(0.0f, 1.0f, 0.0f);//默认vaxis就是相机朝向方向。
 
-        // Rotate the view vector by the horizontal angle around the vertical axis
-        Vector3f View(1.0f, 0.0f, 0.0f);
-        View.Rotate(m_AngleH, Vaxis);
-        View.Normalize();
+        Vector3f view(1.0f, 0.0f, 0.0f);
+        view.Rotate(m_AngleH, vaxis);//向量view绕vaxis(y轴)旋转m_AngleH度。
+        view.Normalize();
 
-        // Rotate the view vector by the vertical angle around the horizontal axis
-        Vector3f Haxis = Vaxis.Cross(View);
-        Haxis.Normalize();
-        View.Rotate(m_AngleV, Haxis);
-
-        m_target = View;
+        Vector3f haxis = vaxis.Cross(view);//获得垂直于vaxis与view平面的向量haxis
+        haxis.Normalize();
+        view.Rotate(m_AngleV, haxis);//向量View绕Haxis旋转m_AngleV度。
+  
+        m_target = view;//新的相机方向。
         m_target.Normalize();
 
-        m_up = m_target.Cross(Haxis);
+        m_up = m_target.Cross(haxis);//修复相机up
         m_up.Normalize();
     }
 
@@ -231,7 +239,7 @@ namespace lh_gl {
     void Camera::AddToATB(TwBar* bar)
     {
         TwAddButton(bar, "Camera", NULL, NULL, "");
-        TwAddVarRW(bar, "Position", TW_TYPE_OGLDEV_VECTOR3F, (void*)&m_pos, NULL);
+        TwAddVarRW(bar, "Position", TW_TYPE_LHGL_VECTOR3F, (void*)&m_pos, NULL);
         TwAddVarRO(bar, "Direction", TW_TYPE_DIR3F, &m_target, " axisz=-z ");
     }
 }
