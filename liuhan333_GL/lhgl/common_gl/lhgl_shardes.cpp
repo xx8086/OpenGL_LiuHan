@@ -3,9 +3,24 @@
 #include "lhgl_pipeline.h"
 #include "glut.h"
 #include "lhgl_key_trans.h"
+#include "base_config.h"
 
 namespace lh_gl_sharde {
     using namespace lh_gl;
+
+    struct VertexText
+    {
+        Vector3f m_pos;
+        Vector2f m_tex;
+
+        VertexText() {}
+
+        VertexText(Vector3f pos, Vector2f tex)
+        {
+            m_pos = pos;
+            m_tex = tex;
+        }
+    };
 
     CShardes::CShardes()
     {
@@ -30,8 +45,30 @@ namespace lh_gl_sharde {
     void CShardes::release()
     {
         release_camera();
+        release_texture();
     }
   
+    bool CShardes::init_texture()
+    {
+        release_texture();
+
+        glFrontFace(GL_CW);
+        glCullFace(GL_BACK);
+        glEnable(GL_CULL_FACE);
+
+        glUniform1i(sampler_location, 0);
+        texture = new Texture(GL_TEXTURE_2D, "..\\res\\Content\\Beauty.jpg");
+        if (!texture->load_image()) 
+        {
+            return false;
+        }
+        return true;
+    }
+
+    void CShardes::release_texture()
+    {
+        DELETE_PTR(texture)
+    }
     void CShardes::init_camera()
     {
         release_camera();
@@ -44,11 +81,7 @@ namespace lh_gl_sharde {
 
     void CShardes::release_camera()
     {
-        if (game_camera != nullptr)
-        {
-            delete game_camera;
-            game_camera = nullptr;
-        }
+        DELETE_PTR(game_camera)
     }
 
 
@@ -69,7 +102,7 @@ namespace lh_gl_sharde {
 
     void CShardes::render_bypipe()
     {
-        fscale += 0.01f;
+        fscale += 0.1f;
         Pipeline p;
         p.Rotate(0.0f, fscale, 0.0f);
         p.WorldPos(0.0f, 0.0f, -1.0f);
@@ -121,6 +154,23 @@ namespace lh_gl_sharde {
         glUniformMatrix4fv(world_location, 1, GL_TRUE, world);
     }
 
+    void CShardes::render_scene_texture()
+    {
+        glClear(GL_COLOR_BUFFER_BIT);
+        render_bypipe();
+        
+        glEnableVertexAttribArray(0);
+        glEnableVertexAttribArray(1);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexText), 0);
+        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(VertexText), (const GLvoid*)12);
+        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
+        texture->bind_image(GL_TEXTURE0);
+        glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
+
+        glDisableVertexAttribArray(0);
+        glDisableVertexAttribArray(1);
+    }
     void CShardes::render_scene()
     {
         glClear(GL_COLOR_BUFFER_BIT);
@@ -136,6 +186,7 @@ namespace lh_gl_sharde {
         glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
         //glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, IBO);
         //glDrawArrays(GL_TRIANGLES, 0, 3);
+
         glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 
         glDisableVertexAttribArray(0);
@@ -147,10 +198,14 @@ namespace lh_gl_sharde {
         assert(CLHShardes::glsharde_init());
         set_vs_filename("..\\shardes\\shader.vs");
         set_fs_filename("..\\shardes\\shader.fs");
-        create_vertex_buffer();
+        
+        create_vertex_texture();
+        //create_vertex_buffer();
         create_index_buffer();
         init_projection();
-        return do_sharde();
+        do_sharde();
+        init_texture();
+        return true;
     }
 
 
@@ -165,6 +220,20 @@ namespace lh_gl_sharde {
         glGenBuffers(1, &ibo);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, ibo);
         glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(indices), indices, GL_STATIC_DRAW);
+    }
+
+
+    void CShardes::create_vertex_texture()
+    {
+        VertexText Vertices[4] = { 
+            VertexText(Vector3f(-1.0f, -1.0f, 0.5773f), Vector2f(0.0f, 0.0f)),
+            VertexText(Vector3f(0.0f, -1.0f, -1.15475f), Vector2f(0.5f, 0.0f)),
+            VertexText(Vector3f(1.0f, -1.0f, 0.5773f),  Vector2f(1.0f, 0.0f)),
+            VertexText(Vector3f(0.0f, 1.0f, 0.0f),      Vector2f(0.5f, 1.0f)) };
+
+        glGenBuffers(1, &vbo);
+        glBindBuffer(GL_ARRAY_BUFFER, vbo);
+        glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
     }
 
     void CShardes::create_vertex_buffer()
@@ -185,6 +254,7 @@ namespace lh_gl_sharde {
         assert(compile_shaders(shader_program));
         //get_uniformlocation(shader_program, scale_location, "gScale");
         get_uniformlocation(shader_program, world_location, "gworld");
+        get_uniformlocation(shader_program, sampler_location, "gsampler");
         return true;
     }
 

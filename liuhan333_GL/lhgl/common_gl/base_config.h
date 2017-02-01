@@ -6,5 +6,18 @@
 
 #define FALSE_RT(a,t) if(!a){return t;}
 
+#define DELETE_PTR(p) \
+if(nullptr != p) \
+{\
+    delete p;\
+    p = nullptr;\
+}
+
+#define DELETE_ARRAY_PTR(p) \
+if(nullptr != p) \
+{\
+    delete [] p;\
+    p = nullptr;\
+}
 
 #endif

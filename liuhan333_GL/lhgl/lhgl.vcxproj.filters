@@ -96,6 +96,9 @@
     <ClInclude Include="common_gl\lhgl_key_trans.h">
       <Filter>common_gl\common_gl_include</Filter>
     </ClInclude>
+    <ClInclude Include="common_gl\lhgl_image.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -141,7 +144,10 @@
       <Filter>common_gl\common_gl_source</Filter>
     </ClCompile>
     <ClCompile Include="common_gl\lhgl_key_trans.cpp">
-      <Filter>common_gl\common_gl_include</Filter>
+      <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\lhgl_image.cpp">
+      <Filter>common_gl\common_gl_source</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

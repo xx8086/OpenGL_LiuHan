@@ -76,7 +76,7 @@ namespace lh_gl_interface {
 
     bool LhGlInterfase::drew()
     {
-        shardes.render_scene();
+        shardes.render_scene_texture();
         return true;
     }
 

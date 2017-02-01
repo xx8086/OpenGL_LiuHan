@@ -90,12 +90,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LHGL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)..\include\atb\;$(SolutionDir)lh_include\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)..\include\atb\;$(SolutionDir)lh_include\;E:\myWork\3D\ogldev-source\Include\ImageMagick-6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)..\lib\glew_d_lib\glew32d.lib;$(SolutionDir)..\lib\glut_lib\glut32.lib;$(SolutionDir)..\lib\ant_lib\AntTweakBar.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)..\lib\glew_d_lib\glew32d.lib;$(SolutionDir)..\lib\glut_lib\glut32.lib;$(SolutionDir)..\lib\ant_lib\AntTweakBar.lib;E:\myWork\3D\ogldev-source\Lib\CORE_DB_Magick++_.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)lh_lib\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
@@ -158,6 +158,7 @@
     <ClInclude Include="common_gl\base_config.h" />
     <ClInclude Include="common_gl\lhgl_basic_lights.h" />
     <ClInclude Include="common_gl\lhgl_camera.h" />
+    <ClInclude Include="common_gl\lhgl_image.h" />
     <ClInclude Include="common_gl\lhgl_interface.h" />
     <ClInclude Include="common_gl\lhgl_keys.h" />
     <ClInclude Include="common_gl\lhgl_lights_common.h" />
@@ -178,6 +179,7 @@
   <ItemGroup>
     <ClCompile Include="common_gl\lhgl_basic_lights.cpp" />
     <ClCompile Include="common_gl\lhgl_camera.cpp" />
+    <ClCompile Include="common_gl\lhgl_image.cpp" />
     <ClCompile Include="common_gl\lhgl_interface.cpp" />
     <ClCompile Include="common_gl\lhgl_math.cpp" />
     <ClCompile Include="common_gl\lhgl_pipeline.cpp" />

@@ -4,6 +4,7 @@
 #include "GL\glew.h"
 #include "lhgl_math.h"
 #include "lhgl_camera.h"
+#include "lhgl_image.h"
 
 namespace lh_gl_sharde {
 
@@ -21,7 +22,9 @@ namespace lh_gl_sharde {
         bool glsharde_init();
         void create_index_buffer();
         void create_vertex_buffer();
+        void create_vertex_texture();
         void render_scene();
+        void render_scene_texture();
     public:
         bool onmouse(unsigned int mark, unsigned int x, unsigned int y);
         bool specialkeyboard(bool, unsigned int, unsigned int);
@@ -35,6 +38,8 @@ namespace lh_gl_sharde {
 
     private:
         void init_projection();
+        bool init_texture();
+        void release_texture();
         void init_camera();
         void release_camera();
     private:
@@ -47,8 +52,10 @@ namespace lh_gl_sharde {
         GLuint shader_program;
         GLuint scale_location;
         GLuint world_location;
+        GLuint sampler_location;
         lh_gl::PersProjInfo pers_projInfo;
         lh_gl::Camera* game_camera = nullptr;
+        lh_gl::Texture* texture = nullptr;
     };
 }
 #endif
