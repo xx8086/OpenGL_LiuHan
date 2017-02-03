@@ -72,6 +72,7 @@
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
@@ -90,12 +91,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LHGL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)..\include\atb\;$(SolutionDir)lh_include\;E:\myWork\3D\ogldev-source\Include\ImageMagick-6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)..\include\atb\;$(SolutionDir)lh_include\;$(SolutionDir)..\include\ImageMagick6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)..\lib\glew_d_lib\glew32d.lib;$(SolutionDir)..\lib\glut_lib\glut32.lib;$(SolutionDir)..\lib\ant_lib\AntTweakBar.lib;E:\myWork\3D\ogldev-source\Lib\CORE_DB_Magick++_.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)..\lib\glew_d_lib\glew32d.lib;$(SolutionDir)..\lib\glut_lib\glut32.lib;$(SolutionDir)..\lib\ant_lib\AntTweakBar.lib;$(SolutionDir)..\lib\ImageMagick6_lib\CORE_DB_Magick++_.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)lh_lib\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
