@@ -5,6 +5,7 @@
 #include "lhgl_math.h"
 #include "lhgl_camera.h"
 #include "lhgl_image.h"
+#include "lhgl_lights_common.h"
 
 namespace lh_gl_sharde {
 
@@ -35,12 +36,14 @@ namespace lh_gl_sharde {
         void render_scale();
         void render_triangle();
         bool do_sharde();
+        void setdirectionallight();
 
     private:
         void init_projection();
         bool init_texture();
         void release_texture();
         void init_camera();
+        void init_light();
         void release_camera();
     private:
         void init();
@@ -53,7 +56,12 @@ namespace lh_gl_sharde {
         GLuint scale_location;
         GLuint world_location;
         GLuint sampler_location;
+        GLuint dirlight_colorlocation;
+        GLuint dirlight_ambientintensitylocation;
+
+
         lh_gl::PersProjInfo pers_projInfo;
+        lh_gl::DirectionalLight directionallight;
         lh_gl::Camera* game_camera = nullptr;
         lh_gl::Texture* texture = nullptr;
     };

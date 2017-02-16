@@ -3,6 +3,7 @@
 
 #include <AntTweakBar.h>
 #include "lhgl_math.h"
+#include "lhgl_keys.h"
 
 namespace lh_gl {
     class BaseLight
@@ -33,7 +34,7 @@ namespace lh_gl {
         {
             Direction = Vector3f(0.0f, 0.0f, 0.0f);
         }
-
+        bool on_keyboard(LHGL_KEY Key);
         virtual void AddToATB(TwBar *bar);
     };
 

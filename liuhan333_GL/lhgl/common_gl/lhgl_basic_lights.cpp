@@ -17,6 +17,23 @@ namespace lh_gl {
         TwAddVarRW(bar, s.c_str(), TW_TYPE_FLOAT, &DiffuseIntensity, "min=0.0 max=1.0 step=0.005");
     }
 
+    bool DirectionalLight::on_keyboard(LHGL_KEY Key)
+    {
+        switch (Key)
+        {
+        case LHGL_KEY_V:
+        case LHGL_KEY_v:
+            BaseLight::AmbientIntensity += 0.05f;
+            break;
+        case LHGL_KEY_B:
+        case LHGL_KEY_b:
+            BaseLight::AmbientIntensity -= 0.05f;
+            break;
+        default:
+            break;
+        }
+        return true;
+    }
 
     void DirectionalLight::AddToATB(TwBar *bar)
     {

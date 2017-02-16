@@ -40,6 +40,7 @@ namespace lh_gl_sharde {
     void CShardes::init()
     {
         init_camera();
+        init_light();
     }
 
     void CShardes::release()
@@ -57,7 +58,7 @@ namespace lh_gl_sharde {
         glEnable(GL_CULL_FACE);
 
         glUniform1i(sampler_location, 0);
-        texture = new Texture(GL_TEXTURE_2D, "..\\res\\Content\\Beauty.jpg");
+        texture = new Texture(GL_TEXTURE_2D, "..\\res\\Content\\timg.jpg");
         if (!texture->load_image()) 
         {
             return false;
@@ -69,6 +70,13 @@ namespace lh_gl_sharde {
     {
         DELETE_PTR(texture)
     }
+
+    void CShardes::init_light()
+    {
+        directionallight.Color = Vector3f(1.0f, 1.0f, 1.0f);
+        directionallight.AmbientIntensity = 0.5f;
+    }
+
     void CShardes::init_camera()
     {
         release_camera();
@@ -84,7 +92,6 @@ namespace lh_gl_sharde {
         DELETE_PTR(game_camera)
     }
 
-
     bool CShardes::onmouse(unsigned int mark, unsigned int x, unsigned int y)
     {
         bool rt = false;
@@ -97,7 +104,10 @@ namespace lh_gl_sharde {
 
     bool CShardes::specialkeyboard(bool bchar, unsigned int uchar, unsigned int utype)
     {
-        return game_camera->on_keyboard(lh_to_glkey(bchar, uchar));
+        LHGL_KEY key = lh_to_glkey(bchar, uchar);
+        game_camera->on_keyboard(key);
+        directionallight.on_keyboard(key);
+        return true;
     }
 
     void CShardes::render_bypipe()
@@ -110,6 +120,7 @@ namespace lh_gl_sharde {
         p.SetCamera(*game_camera);
 
         glUniformMatrix4fv(world_location, 1, GL_TRUE, (const GLfloat*)p.GetWVPTrans());// GetWorldTrans
+        setdirectionallight();
     }
 
     void CShardes::render_triangle()
@@ -252,9 +263,11 @@ namespace lh_gl_sharde {
     bool CShardes::do_sharde()
     {
         assert(compile_shaders(shader_program));
-        //get_uniformlocation(shader_program, scale_location, "gScale");
         get_uniformlocation(shader_program, world_location, "gworld");
         get_uniformlocation(shader_program, sampler_location, "gsampler");
+        get_uniformlocation(shader_program, dirlight_colorlocation, "gDirectionalLight.Color");
+        get_uniformlocation(shader_program, dirlight_ambientintensitylocation, "gDirectionalLight.AmbientIntensity");
+
         return true;
     }
 
@@ -265,5 +278,11 @@ namespace lh_gl_sharde {
         pers_projInfo.Width = WINDOW_WIDTH;
         pers_projInfo.zNear = 1.0f;
         pers_projInfo.zFar = 100.0f;
+    }
+
+    void CShardes::setdirectionallight()
+    {
+        glUniform3f(dirlight_colorlocation, directionallight.Color.x, directionallight.Color.y, directionallight.Color.z);
+        glUniform1f(dirlight_ambientintensitylocation, directionallight.AmbientIntensity);
     }
 }
