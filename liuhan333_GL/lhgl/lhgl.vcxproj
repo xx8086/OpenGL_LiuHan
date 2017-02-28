@@ -91,7 +91,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LHGL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)..\include\atb\;$(SolutionDir)lh_include\;$(SolutionDir)..\include\ImageMagick6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)..\include\atb\;$(SolutionDir)lh_include\;$(SolutionDir)lhgl\common_gl\common_include;$(SolutionDir)lhgl\common_gl\common_gl_include;$(SolutionDir)lhgl\gl_include;$(SolutionDir)..\include\ImageMagick6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -156,41 +156,45 @@
   <ItemGroup>
     <ClInclude Include="..\lh_include\lhgl.h" />
     <ClInclude Include="..\lh_include\lhgl_config.h" />
-    <ClInclude Include="common_gl\base_config.h" />
-    <ClInclude Include="common_gl\lhgl_basic_lights.h" />
-    <ClInclude Include="common_gl\lhgl_camera.h" />
-    <ClInclude Include="common_gl\lhgl_image.h" />
-    <ClInclude Include="common_gl\lhgl_interface.h" />
-    <ClInclude Include="common_gl\lhgl_keys.h" />
-    <ClInclude Include="common_gl\lhgl_lights_common.h" />
-    <ClInclude Include="common_gl\lhgl_math.h" />
-    <ClInclude Include="common_gl\lhgl_pipeline.h" />
-    <ClInclude Include="common_gl\lhgl_shardes.h" />
-    <ClInclude Include="common_gl\lhgl_atb.h" />
-    <ClInclude Include="common_gl\lhgl_technique.h" />
-    <ClInclude Include="common_gl\lhgl_types.h" />
-    <ClInclude Include="common_gl\lhgl_util.h" />
-    <ClInclude Include="common_gl\lhgl_key_trans.h" />
-    <ClInclude Include="common_gl\lhsharde.h" />
-    <ClInclude Include="common_gl\set_timer.h" />
-    <ClInclude Include="common_gl\singleton.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_atb.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_basic_lights.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_camera.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_image.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_keys.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_key_trans.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_lights_common.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_math.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_pipeline.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_technique.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_types.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_util.h" />
+    <ClInclude Include="common_gl\common_include\base_config.h" />
+    <ClInclude Include="common_gl\common_include\lhsharde.h" />
+    <ClInclude Include="common_gl\common_include\set_timer.h" />
+    <ClInclude Include="common_gl\common_include\singleton.h" />
+    <ClInclude Include="gl_include\gl_render.h" />
+    <ClInclude Include="gl_include\gl_render_base.h" />
+    <ClInclude Include="gl_include\gl_shardes.h" />
+    <ClInclude Include="gl_include\gl_simple_render.h" />
+    <ClInclude Include="gl_include\gl_vertex_interface.h" />
+    <ClInclude Include="gl_include\gl_vertex.h" />
+    <ClInclude Include="gl_include\gl_vertex_struct.h" />
+    <ClInclude Include="gl_include\lhgl_interface.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="common_gl\lhgl_basic_lights.cpp" />
-    <ClCompile Include="common_gl\lhgl_camera.cpp" />
-    <ClCompile Include="common_gl\lhgl_image.cpp" />
-    <ClCompile Include="common_gl\lhgl_interface.cpp" />
-    <ClCompile Include="common_gl\lhgl_math.cpp" />
-    <ClCompile Include="common_gl\lhgl_pipeline.cpp" />
-    <ClCompile Include="common_gl\lhgl_shardes.cpp" />
-    <ClCompile Include="common_gl\lhgl_atb.cpp" />
-    <ClCompile Include="common_gl\lhgl_util.cpp" />
-    <ClCompile Include="common_gl\lhgl_key_trans.cpp" />
-    <ClCompile Include="common_gl\lhsharde.cpp" />
-    <ClCompile Include="common_gl\set_timer.cpp" />
-    <ClCompile Include="common_gl\lhgl_technique.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhgl_atb.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhgl_basic_lights.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhgl_camera.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhgl_image.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhgl_key_trans.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhgl_math.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhgl_pipeline.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhgl_technique.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhgl_util.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhsharde.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\set_timer.cpp" />
     <ClCompile Include="dllmain.cpp">
       <CompileAsManaged Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">false</CompileAsManaged>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
@@ -205,12 +209,21 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="gl_include\gl_simple_render.cpp" />
+    <ClCompile Include="gl_source\gl_render.cpp" />
+    <ClCompile Include="gl_source\gl_render_base.cpp" />
+    <ClCompile Include="gl_source\gl_shardes.cpp" />
+    <ClCompile Include="gl_source\gl_vertex_interface.cpp" />
+    <ClCompile Include="gl_source\gl_vertex.cpp" />
+    <ClCompile Include="gl_source\lhgl_interface.cpp" />
     <ClCompile Include="lhgl.cpp" />
     <ClCompile Include="stdafx.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\shardes\shader.fs" />
     <None Include="..\shardes\shader.vs" />
+    <None Include="..\shardes\shader0.fs" />
+    <None Include="..\shardes\shader0.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

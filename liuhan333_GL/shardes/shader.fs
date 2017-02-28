@@ -1,12 +1,15 @@
 #version 430
 
 in vec2 texcoord0;
+in vec3 normal0;
 out vec4 FragColor;
 
 struct DirectionalLight
 {
-    vec3 Color;
     float AmbientIntensity;
+    float DiffuseIntensity;  
+    vec3 Color;
+    vec3 Direction;
 };
 
 uniform DirectionalLight gDirectionalLight;
@@ -14,7 +17,18 @@ uniform sampler2D gsampler;
 
 void main()
 {
-    FragColor = vec4(gDirectionalLight.Color, 1.0f) * //环境光
-	            texture2D(gsampler, texcoord0.xy) * //物体表面颜色
-                gDirectionalLight.AmbientIntensity; //环境强度因素
+    vec4 ambien_color = vec4(gDirectionalLight.Color, 1.0f) *
+                        gDirectionalLight.AmbientIntensity;
+    float diffuse_factor = dot(normalize(normal0), -gDirectionalLight.Direction);
+    vec4 diffuse_color = vec4(0, 0, 0, 0);
+    if(diffuse_factor > 0)
+    {
+        diffuse_color = vec4(gDirectionalLight.Color, 1.0f) *
+                        gDirectionalLight.DiffuseIntensity *
+                        diffuse_factor;
+    }
+
+    FragColor = texture2D(gsampler, texcoord0.xy) *
+                (ambien_color + diffuse_color);
+
 }

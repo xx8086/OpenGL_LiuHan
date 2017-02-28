@@ -6,7 +6,7 @@
 #define DLL_EXPORTS
 #include <string>
 #include "lhgl.h"
-#include "common_gl\lhgl_interface.h"
+#include "lhgl_interface.h"
 
 using namespace lh_gl_interface;
 
@@ -37,10 +37,7 @@ bool ExportLHGL::lhgl_drew()
 {
     return LhGlInterfase::get_lhinstance()->drew();
 }
-bool ExportLHGL::lhgl_drewsimple()
-{
-    return LhGlInterfase::get_lhinstance()->drewsimple();
-}
+
 bool ExportLHGL::lhgl_relese()
 {
     return LhGlInterfase::get_lhinstance()->relese();
