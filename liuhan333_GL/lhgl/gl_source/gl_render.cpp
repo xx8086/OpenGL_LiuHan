@@ -52,6 +52,7 @@ namespace lh_gl {
         _gl_shardes->gluniform_world_matrix_4fv(1, GL_TRUE, (const GLfloat*)p.GetWorldTrans().m);
         _gl_shardes->gluniform_wvp_matrix_4fv(1, GL_TRUE, (const GLfloat*)p.GetWVPTrans().m);
         _gl_shardes->gluniform_light(_directionallight);
+        _gl_shardes->gluniform_specular_reflection(_game_camera->GetPos(), 1.0, 10);
     }
     void CRender::render_translation()
     {

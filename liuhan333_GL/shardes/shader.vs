@@ -9,10 +9,13 @@ uniform mat4 gworld;
 
 out vec2 texcoord0;
 out vec3 normal0;
+out vec3 WorldPos0;
 
 void main()
 {
     gl_Position = gwvp * vec4(Position, 1.0);
     texcoord0 = TexCoord;
     normal0 = (gworld * vec4(Normal, 0.0)).xyz;
+    WorldPos0 = (gworld * vec4(Position, 1.0)).xyz;
 }
+

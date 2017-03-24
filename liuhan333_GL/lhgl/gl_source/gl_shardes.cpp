@@ -28,6 +28,10 @@ namespace lh_gl {
         _dirlight_directionlocation = get_uniformlocation(_shader_program, "gDirectionalLight.Direction");
         _dirlight_diffuseintensitylocation = get_uniformlocation(_shader_program, "gDirectionalLight.DiffuseIntensity");
 
+        _eye_worldpos = get_uniformlocation(_shader_program, "gEyeWorldPos");
+        _mat_specular_intensity = get_uniformlocation(_shader_program, "gMatSpecularIntensity");
+        _specular_power = get_uniformlocation(_shader_program, "gSpecularPower");
+
         return true;
     }
 
@@ -60,6 +64,15 @@ namespace lh_gl {
         direction.Normalize();
         glUniform3f(_dirlight_directionlocation, direction.x, direction.y, direction.z);
         glUniform1f(_dirlight_diffuseintensitylocation, dl.DiffuseIntensity);
+
+        
+    }
+
+    void CShardes::gluniform_specular_reflection(const Vector3f& wpos, float intensity, float power)
+    {
+        glUniform3f(_eye_worldpos, wpos.x, wpos.y, wpos.z);
+        glUniform1f(_mat_specular_intensity, intensity);
+        glUniform1f(_specular_power, power);
     }
 
 }

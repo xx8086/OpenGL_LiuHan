@@ -19,6 +19,7 @@ namespace lh_gl {
         void gluniform_scale_1f(const float&);
         void gluniform_sampler_1i(const unsigned int&);
         void gluniform_light(const DirectionalLight&);
+        void gluniform_specular_reflection(const Vector3f&, float, float);
     private:
         GLuint _shader_program;
         GLuint _scale_location;
@@ -29,6 +30,9 @@ namespace lh_gl {
         GLuint _dirlight_ambientintensitylocation;
         GLuint _dirlight_directionlocation;
         GLuint _dirlight_diffuseintensitylocation;
+        GLuint _eye_worldpos;
+        GLuint _mat_specular_intensity;
+        GLuint _specular_power;
     };
 }
 

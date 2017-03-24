@@ -87,7 +87,7 @@ namespace lh_gl {
         }
 
         m_WVPLocation = GetUniformLocation("gWVP");
-        m_WorldMatrixLocation = GetUniformLocation("gWorld");
+        m_WorldMatrixLocation = GetUniformLocation("gworld");
         m_colorTextureLocation = GetUniformLocation("gColorMap");
         m_eyeWorldPosLocation = GetUniformLocation("gEyeWorldPos");
         m_dirLightLocation.Color = GetUniformLocation("gDirectionalLight.Color");

@@ -1,4 +1,4 @@
-#ifndef LHGL_BASE_LIGHTS_H
+﻿#ifndef LHGL_BASE_LIGHTS_H
 #define	LHGL_BASE_LIGHTS_H
 
 
@@ -23,18 +23,18 @@ namespace lh_gl {
         void SetDirectionalLight(const DirectionalLight& Light);
         void SetPointLights(unsigned int NumLights, const PointLight* pLights);
         void SetSpotLights(unsigned int NumLights, const SpotLight* pLights);
+        
         void SetEyeWorldPos(const Vector3f& EyeWorldPos);
         void SetMatSpecularIntensity(float Intensity);
         void SetMatSpecularPower(float Power);
-
     private:
+        GLuint m_eyeWorldPosLocation;
+        GLuint m_matSpecularIntensityLocation;
+        GLuint m_matSpecularPowerLocation;
 
         GLuint m_WVPLocation;
         GLuint m_WorldMatrixLocation;
         GLuint m_colorTextureLocation;
-        GLuint m_eyeWorldPosLocation;
-        GLuint m_matSpecularIntensityLocation;
-        GLuint m_matSpecularPowerLocation;
         GLuint m_numPointLightsLocation;
         GLuint m_numSpotLightsLocation;
 

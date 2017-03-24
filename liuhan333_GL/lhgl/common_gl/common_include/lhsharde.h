@@ -23,7 +23,6 @@ namespace lh_gl {
     private:
         std::string str_vs_filename;
         std::string str_fs_filename;
-    
     };
 }
 
