@@ -53,7 +53,21 @@ namespace lh_gl {
         _gl_shardes->gluniform_wvp_matrix_4fv(1, GL_TRUE, (const GLfloat*)p.GetWVPTrans().m);
         _gl_shardes->gluniform_light(_directionallight);
         _gl_shardes->gluniform_specular_reflection(_game_camera->GetPos(), 1.0, 10);
+
+
+        PointLight pl[2];
+        pl[0].DiffuseIntensity = 0.5f;
+        pl[0].Color = Vector3f(1.0f, 0.5f, 0.0f);
+        pl[0].Position = Vector3f(130.0f, 100.0f, 300 * FieldDepth * (cosf(_fscale) + 1.0f) / 2.0f);
+        pl[0].Attenuation.Linear = 10.0f;
+        pl[0].Attenuation.Exp = 2.0f;
+        pl[1].DiffuseIntensity = 0.5f;
+        pl[1].Color = Vector3f(0.0f, 0.5f, 1.0f);
+        pl[1].Position = Vector3f(7.0f, 1.0f, FieldDepth * (sinf(_fscale) + 1.0f) / 2.0f);
+        pl[1].Attenuation.Linear = 0.1f;
+        _gl_shardes->gluniform_setpointlights(2, pl);
     }
+
     void CRender::render_translation()
     {
         _fscale += 0.01f;

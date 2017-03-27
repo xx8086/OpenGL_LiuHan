@@ -28,6 +28,7 @@ namespace lh_gl {
 
     private:
         float _fscale = 0.0f;
+        const float FieldDepth = 20.0f;
     };
 }
 #endif

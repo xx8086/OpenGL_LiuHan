@@ -1,17 +1,40 @@
 #version 430
 
-struct DirectionalLight
-{
-    float AmbientIntensity;
-    float DiffuseIntensity;  
-    vec3 Color;
-    vec3 Direction;
-};
+const int MAX_POINT_LIGHTS = 2; 
+struct BaseLight                                                                    
+{                                                                                   
+    vec3 Color;                                                                     
+    float AmbientIntensity;                                                         
+    float DiffuseIntensity;                                                         
+};                                                                                  
+                                                                                    
+struct DirectionalLight                                                             
+{                                                                                   
+    BaseLight Base;                                                                 
+    vec3 Direction;                                                                 
+};                                                                                  
+                                                                                    
+struct Attenuation                                                                  
+{                                                                                   
+    float Constant;                                                                 
+    float Linear;                                                                   
+    float Exp;                                                                      
+};                                                                                  
+                                                                                    
+struct PointLight                                                                           
+{                                                                                           
+    BaseLight Base;                                                                         
+    vec3 Position;                                                                          
+    Attenuation Atten;                                                                      
+};    
 
 in vec2 texcoord0;
 in vec3 normal0;
 in vec3 WorldPos0;
 out vec4 FragColor;
+
+uniform int gNumPointLights;
+uniform PointLight gPointLights[MAX_POINT_LIGHTS];
 
 uniform DirectionalLight gDirectionalLight;
 uniform sampler2D gsampler;
@@ -20,30 +43,56 @@ uniform vec3 gEyeWorldPos;
 uniform float gMatSpecularIntensity;
 uniform float gSpecularPower;
 
+vec4 CalcLightInternal(BaseLight Light, vec3 LightDirection, vec3 Normal)                   
+{                                                                                           
+    vec4 AmbientColor = vec4(Light.Color * Light.AmbientIntensity, 1.0f);
+    float DiffuseFactor = dot(Normal, -LightDirection);                                     
+                                                                                            
+    vec4 DiffuseColor  = vec4(0, 0, 0, 0);                                                  
+    vec4 SpecularColor = vec4(0, 0, 0, 0);                                                  
+                                                                                            
+    if (DiffuseFactor > 0) {                                                                
+        DiffuseColor = vec4(Light.Color * Light.DiffuseIntensity * DiffuseFactor, 1.0f);    
+                                                                                            
+        vec3 VertexToEye = normalize(gEyeWorldPos - WorldPos0);                             
+        vec3 LightReflect = normalize(reflect(LightDirection, Normal));                     
+        float SpecularFactor = dot(VertexToEye, LightReflect);                                      
+        if (SpecularFactor > 0) {                                                           
+            SpecularFactor = pow(SpecularFactor, gSpecularPower);
+            SpecularColor = vec4(Light.Color * gMatSpecularIntensity * SpecularFactor, 1.0f);
+        }                                                                                   
+    }
+    return (AmbientColor + DiffuseColor + SpecularColor);                                   
+}   
+
+vec4 CalcDirectionalLight(vec3 Normal)                                                      
+{                                                                                           
+    return CalcLightInternal(gDirectionalLight.Base, gDirectionalLight.Direction, Normal); 
+}   
+
+vec4 CalcPointLight(int Index, vec3 Normal)                                                 
+{                                                                                           
+    vec3 LightDirection = WorldPos0 - gPointLights[Index].Position;                         
+    float Distance = length(LightDirection);                                                
+    LightDirection = normalize(LightDirection);                                             
+                                                                                            
+    vec4 Color = CalcLightInternal(gPointLights[Index].Base, LightDirection, Normal);       
+    float Attenuation =  gPointLights[Index].Atten.Constant +                               
+                         gPointLights[Index].Atten.Linear * Distance +                      
+                         gPointLights[Index].Atten.Exp * Distance * Distance;               
+                                                                                            
+    return Color / Attenuation;                                                             
+}    
+
 void main()
 {
-    vec3 normal_base = normalize(normal0);
-    vec4 ambien_color = vec4(gDirectionalLight.Color, 1.0f) * gDirectionalLight.AmbientIntensity;//环境光
-    float diffuse_factor = dot(normal_base, -gDirectionalLight.Direction);//光线与法线夹角余玄
-    vec4 diffuse_color = vec4(0, 0, 0, 0);
-    vec4 specular_color = vec4(0, 0, 0, 0);
-    if(diffuse_factor > 0)
-    {
-        diffuse_color = vec4(gDirectionalLight.Color, 1.0f) *
-                        gDirectionalLight.DiffuseIntensity *
-                        diffuse_factor;//漫射光 = 光颜色*漫反射光强度*漫反射余玄
-
-        vec3 vertex_eye = normalize(gEyeWorldPos - WorldPos0);
-        vec3 light_reflect = normalize(reflect(gDirectionalLight.Direction, normal_base));
-        float specularfactor = dot(vertex_eye, light_reflect);
-        if (specularfactor > 0) 
-        {
-            specularfactor = pow(specularfactor, gSpecularPower);
-            specular_color = vec4(gDirectionalLight.Color * gMatSpecularIntensity * specularfactor, 1.0f);
-        }
-    }
-
-    FragColor = texture2D(gsampler, texcoord0.xy) *
-                (ambien_color + diffuse_color + specular_color);
+    vec3 Normal = normalize(normal0);                                                       
+    vec4 TotalLight = CalcDirectionalLight(Normal);                                         
+                                                                                            
+    for (int i = 0 ; i < gNumPointLights ; i++) {                                           
+        TotalLight += CalcPointLight(i, Normal);                                            
+    }                                                                                       
+                                                                                            
+    FragColor = texture2D(gsampler, texcoord0.xy) * TotalLight;  
 
 }
