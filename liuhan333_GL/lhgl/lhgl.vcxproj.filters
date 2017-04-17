@@ -123,6 +123,9 @@
     <ClInclude Include="common_gl\common_gl_include\lhgl_basic_lights.h">
       <Filter>common_gl\common_gl_include</Filter>
     </ClInclude>
+    <ClInclude Include="common_gl\common_gl_include\lhgl_mesh.h">
+      <Filter>common_gl\common_gl_include</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -186,6 +189,9 @@
       <Filter>gl_source</Filter>
     </ClCompile>
     <ClCompile Include="common_gl\common_gl_source\lhgl_basic_lights.cpp">
+      <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
+    <ClCompile Include="common_gl\common_gl_source\lhgl_mesh.cpp">
       <Filter>common_gl\common_gl_source</Filter>
     </ClCompile>
   </ItemGroup>

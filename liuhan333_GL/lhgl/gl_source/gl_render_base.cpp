@@ -15,6 +15,7 @@ namespace lh_gl {
         DELETE_PTR(_game_camera)
         DELETE_PTR(_texture)
         DELETE_PTR(_gl_vertex)
+        DELETE_PTR(_mesh)
     }
 
     void CGlRenderBase::init_projection()
@@ -24,6 +25,14 @@ namespace lh_gl {
         _pers_projInfo.Width = WINDOW_WIDTH;
         _pers_projInfo.zNear = 1.0f;
         _pers_projInfo.zFar = 100.0f;
+    }
+
+    bool CGlRenderBase::init_mesh()
+    {
+        DELETE_PTR(_mesh)
+        glEnable(GL_DEPTH_TEST);
+        _mesh = new Mesh(); 
+        return _mesh->LoadMesh("..\\res\\Content\\phoenix_ugv.md2");
     }
 
     bool CGlRenderBase::init_texture()

@@ -91,12 +91,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LHGL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)..\include\atb\;$(SolutionDir)lh_include\;$(SolutionDir)lhgl\common_gl\common_include;$(SolutionDir)lhgl\common_gl\common_gl_include;$(SolutionDir)lhgl\gl_include;$(SolutionDir)..\include\ImageMagick6;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)..\include\atb\;$(SolutionDir)lh_include\;$(SolutionDir)lhgl\common_gl\common_include;$(SolutionDir)lhgl\common_gl\common_gl_include;$(SolutionDir)lhgl\gl_include;$(SolutionDir)..\include\ImageMagick6;$(SolutionDir)..\include\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)..\lib\glew_d_lib\glew32d.lib;$(SolutionDir)..\lib\glut_lib\glut32.lib;$(SolutionDir)..\lib\ant_lib\AntTweakBar.lib;$(SolutionDir)..\lib\ImageMagick6_lib\CORE_DB_Magick++_.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)..\lib\glew_d_lib\glew32d.lib;$(SolutionDir)..\lib\glut_lib\glut32.lib;$(SolutionDir)..\lib\ant_lib\AntTweakBar.lib;$(SolutionDir)..\lib\ImageMagick6_lib\CORE_DB_Magick++_.lib;$(SolutionDir)..\lib\assimp\assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)lh_lib\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
@@ -164,6 +164,7 @@
     <ClInclude Include="common_gl\common_gl_include\lhgl_key_trans.h" />
     <ClInclude Include="common_gl\common_gl_include\lhgl_lights_common.h" />
     <ClInclude Include="common_gl\common_gl_include\lhgl_math.h" />
+    <ClInclude Include="common_gl\common_gl_include\lhgl_mesh.h" />
     <ClInclude Include="common_gl\common_gl_include\lhgl_pipeline.h" />
     <ClInclude Include="common_gl\common_gl_include\lhgl_technique.h" />
     <ClInclude Include="common_gl\common_gl_include\lhgl_types.h" />
@@ -190,6 +191,7 @@
     <ClCompile Include="common_gl\common_gl_source\lhgl_image.cpp" />
     <ClCompile Include="common_gl\common_gl_source\lhgl_key_trans.cpp" />
     <ClCompile Include="common_gl\common_gl_source\lhgl_math.cpp" />
+    <ClCompile Include="common_gl\common_gl_source\lhgl_mesh.cpp" />
     <ClCompile Include="common_gl\common_gl_source\lhgl_pipeline.cpp" />
     <ClCompile Include="common_gl\common_gl_source\lhgl_technique.cpp" />
     <ClCompile Include="common_gl\common_gl_source\lhgl_util.cpp" />

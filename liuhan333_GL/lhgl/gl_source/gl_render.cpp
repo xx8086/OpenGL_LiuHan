@@ -19,7 +19,7 @@ namespace lh_gl {
 
     void CRender::render_scene_texture()
     {
-        glClear(GL_COLOR_BUFFER_BIT);
+        glClear(GL_COLOR_BUFFER_BIT  |  GL_DEPTH_BUFFER_BIT);
         render_bypipe();
 
         glEnableVertexAttribArray(0);
@@ -36,6 +36,8 @@ namespace lh_gl {
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _gl_vertex->get_ibo());
         glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 
+        _mesh->Render();
+
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(2);
@@ -45,8 +47,9 @@ namespace lh_gl {
     {
         _fscale += 0.1f;
         Pipeline p;
+        p.Scale(0.3f);
         p.Rotate(_fscale, 0.0f, 0.0f);
-        p.WorldPos(0.0f, 0.0f, -1.0f);
+        p.WorldPos(0.0f, 0.0f, -5.0f);
         p.SetPerspectiveProj(_pers_projInfo);// 设置投影变换的参数
         p.SetCamera(*_game_camera);
         _gl_shardes->gluniform_world_matrix_4fv(1, GL_TRUE, (const GLfloat*)p.GetWorldTrans().m);
@@ -135,6 +138,7 @@ namespace lh_gl {
         init_vertex();
         init_projection();
         init_texture();
+        init_mesh();
 
         return true;
     }

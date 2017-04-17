@@ -5,6 +5,7 @@
 #include "lhgl_image.h"
 #include "lhgl_lights_common.h"
 #include "gl_vertex_interface.h"
+#include "lhgl_mesh.h"
 
 namespace lh_gl {
 
@@ -20,6 +21,7 @@ namespace lh_gl {
     protected:
         void init_projection();
         bool init_texture();
+        bool init_mesh();
         void init_camera();
         void init_light();
         void init_vertex();
@@ -29,12 +31,14 @@ namespace lh_gl {
         void release();
 
     protected:
-        CGlVertexInterface* _gl_vertex = nullptr;
-        CShardes* _gl_shardes = nullptr;
         PersProjInfo _pers_projInfo;
         DirectionalLight _directionallight;
+
+        CGlVertexInterface* _gl_vertex = nullptr;
+        CShardes* _gl_shardes = nullptr;
         Camera* _game_camera = nullptr;
         Texture* _texture = nullptr;
+        Mesh* _mesh = nullptr;
     };
 }
 #endif
