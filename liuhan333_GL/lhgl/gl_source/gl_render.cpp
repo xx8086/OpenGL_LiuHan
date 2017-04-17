@@ -66,6 +66,22 @@ namespace lh_gl {
         pl[1].Position = Vector3f(7.0f, 1.0f, FieldDepth * (sinf(_fscale) + 1.0f) / 2.0f);
         pl[1].Attenuation.Linear = 0.1f;
         _gl_shardes->gluniform_setpointlights(2, pl);
+
+        SpotLight sl[2];
+        sl[0].DiffuseIntensity = 0.9f;
+        sl[0].Color = Vector3f(0.0f, 1.0f, 1.0f);
+        sl[0].Position = _game_camera->GetPos();
+        sl[0].Direction = _game_camera->GetTarget();
+        sl[0].Attenuation.Linear = 0.1f;
+        sl[0].Cutoff = 10.0f;
+
+        sl[1].DiffuseIntensity = 0.9f;
+        sl[1].Color = Vector3f(1.0f, 1.0f, 1.0f);
+        sl[1].Position = Vector3f(5.0f, 3.0f, 10.0f);
+        sl[1].Direction = Vector3f(0.0f, -1.0f, 0.0f);
+        sl[1].Attenuation.Linear = 0.1f;
+        sl[1].Cutoff = 20.0f;
+        _gl_shardes->gluniform_setspotlights(2, sl);
     }
 
     void CRender::render_translation()

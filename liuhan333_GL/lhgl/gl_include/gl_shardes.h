@@ -9,6 +9,8 @@ namespace lh_gl {
     {
     public:
         static const unsigned int MAX_POINT_LIGHTS = 2;
+        static const unsigned int MAX_SPOT_LIGHTS = 2;
+        
         //CShardes(const char*, const char*);
         CShardes();
         virtual ~CShardes();
@@ -22,8 +24,10 @@ namespace lh_gl {
         void gluniform_light(const DirectionalLight&);
         void gluniform_specular_reflection(const Vector3f&, float, float);
         void gluniform_setpointlights(unsigned int, const PointLight*);
+        void gluniform_setspotlights(unsigned int, const SpotLight*);
     private:
         bool uniform_point_lights_location();
+        bool uniform_spot_lights_location();
     private:
         GLuint _shader_program;
         GLuint _scale_location;
@@ -58,6 +62,21 @@ namespace lh_gl {
             } Atten;
         } _point_lights_location[MAX_POINT_LIGHTS];
         GLuint _numpoint_lights_location;
+
+        struct {
+            GLuint Color;
+            GLuint AmbientIntensity;
+            GLuint DiffuseIntensity;
+            GLuint Position;
+            GLuint Direction;
+            GLuint Cutoff;
+            struct {
+                GLuint Constant;
+                GLuint Linear;
+                GLuint Exp;
+            } Atten;
+        } _spotLightsLocation[MAX_SPOT_LIGHTS];
+        GLuint _numspot_lights_location;
     };
 }
 
