@@ -71,7 +71,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)$(Configuration)\</OutDir>
+    <OutDir>$(SolutionDir)..\bin\$(Configuration)\</OutDir>
     <LibraryPath>$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -96,7 +96,7 @@
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalDependencies>$(SolutionDir)..\lib\glew_d_lib\glew32d.lib;$(SolutionDir)..\lib\glut_lib\glut32.lib;$(SolutionDir)..\lib\ant_lib\AntTweakBar.lib;$(SolutionDir)..\lib\ImageMagick6_lib\CORE_DB_Magick++_.lib;$(SolutionDir)..\lib\assimp\assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>$(SolutionDir)..\lib\glewlib\glew32d.lib;$(SolutionDir)..\lib\glutlib\glut32.lib;$(SolutionDir)..\lib\antlib\AntTweakBar.lib;$(SolutionDir)..\lib\ImageMagick6lib\CORE_DB_Magick++_.lib;$(SolutionDir)..\lib\assimplib\Debug\assimp-vc140-mt.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <ImportLibrary>$(SolutionDir)lh_lib\$(TargetName).lib</ImportLibrary>
     </Link>
   </ItemDefinitionGroup>
