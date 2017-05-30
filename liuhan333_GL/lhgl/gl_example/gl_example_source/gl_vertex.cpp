@@ -1,5 +1,5 @@
 ﻿#include "gl_vertex.h"
-#include "gl_vertex_struct.h"
+#include "lhgl_vertex_struct.h"
 
 namespace lh_gl {
 

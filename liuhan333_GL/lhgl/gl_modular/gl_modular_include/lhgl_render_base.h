@@ -4,8 +4,8 @@
 #include "lhgl_camera.h"
 #include "lhgl_image.h"
 #include "lhgl_lights_common.h"
-#include "gl_vertex_interface.h"
-#include "lhgl_mesh.h"
+#include "lhgl_vertex_interface.h"
+
 
 namespace lh_gl {
 
@@ -18,27 +18,25 @@ namespace lh_gl {
         CGlRenderBase();
         virtual ~CGlRenderBase();
 
+    public:
+        bool onmouse(unsigned int mark, unsigned int x, unsigned int y);
+        bool specialkeyboard(bool, unsigned int, unsigned int);
+
+    public:
+        virtual bool init();
     protected:
+        virtual void init_shardes() = 0;
+    private:
         void init_projection();
-        bool init_texture();
-        bool init_mesh();
-        void init_camera();
         void init_light();
         void init_vertex();
-        void init_shardes();
-        
-    private:
-        void release();
+        void init_camera();
 
     protected:
         PersProjInfo _pers_projInfo;
         DirectionalLight _directionallight;
-
-        CGlVertexInterface* _gl_vertex = nullptr;
-        CShardes* _gl_shardes = nullptr;
         Camera* _game_camera = nullptr;
-        Texture* _texture = nullptr;
-        Mesh* _mesh = nullptr;
+        CGlVertexInterface* _gl_vertex = nullptr;
     };
 }
 #endif

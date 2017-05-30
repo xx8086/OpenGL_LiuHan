@@ -1,5 +1,5 @@
-#ifndef LH_SHARDE_H
-#define LH_SHARDE_H
+#ifndef GL_SHARDE_BASE_H
+#define GL_SHARDE_BASE_H
 
 #include <GL/glew.h>
 #include <string>

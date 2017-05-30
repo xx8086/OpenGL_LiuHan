@@ -1,6 +1,7 @@
 ﻿#ifndef GL_INCLUDE_GL_RANDER_H
 #define	GL_INCLUDE_GL_RANDER_H
-#include "gl_render_base.h"
+#include "lhgl_render_base.h"
+#include "lhgl_mesh.h"
 
 namespace lh_gl {
 
@@ -8,7 +9,7 @@ namespace lh_gl {
 #define WINDOW_HEIGHT 768
 
     class CRender:
-        protected CGlRenderBase
+        public CGlRenderBase
     {
     public:
         CRender();
@@ -16,8 +17,7 @@ namespace lh_gl {
     public:
         void do_render();
         bool init();
-        bool onmouse(unsigned int mark, unsigned int x, unsigned int y);
-        bool specialkeyboard(bool, unsigned int, unsigned int);
+        
     private:
         void render_scene_texture();
         void render_bypipe();
@@ -26,9 +26,19 @@ namespace lh_gl {
         void render_scale();
         void render_triangle();
 
+    protected:
+        void init_shardes();
+    private:
+        bool init_texture();
+        bool init_mesh();
+        
     private:
         float _fscale = 0.0f;
         const float FieldDepth = 20.0f;
+    private:
+        CShardes* _gl_shardes = nullptr;
+        Texture* _texture = nullptr;
+        Mesh* _mesh = nullptr;
     };
 }
 #endif

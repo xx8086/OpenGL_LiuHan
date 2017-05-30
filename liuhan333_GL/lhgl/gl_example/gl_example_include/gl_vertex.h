@@ -1,7 +1,7 @@
 #ifndef GL_INCLUDE_GL_VERTEX_H
 #define	GL_INCLUDE_GL_VERTEX_H
 #include "GL\glew.h"
-#include "gl_vertex_struct.h"
+#include "lhgl_vertex_struct.h"
 
 namespace lh_gl {
 

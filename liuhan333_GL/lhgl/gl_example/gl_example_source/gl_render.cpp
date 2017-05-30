@@ -1,7 +1,7 @@
 ﻿#include "gl_render.h"
 #include "lhgl_pipeline.h"
-#include "gl_vertex_struct.h"
-#include "lhgl_key_trans.h"
+#include "lhgl_vertex_struct.h"
+#include "base_config.h"
 
 
 namespace lh_gl {
@@ -10,7 +10,11 @@ namespace lh_gl {
     {}
 
     CRender::~CRender()
-    {}
+    {
+        DELETE_PTR(_texture)
+        DELETE_PTR(_gl_vertex)
+        DELETE_PTR(_mesh)
+    }
 
     void CRender::do_render()
     {
@@ -131,33 +135,43 @@ namespace lh_gl {
 
     bool CRender::init()
     {
-        init_camera();
-        init_light();
-        init_shardes();
-
-        init_vertex();
-        init_projection();
+        CGlRenderBase::init();
         init_texture();
         init_mesh();
 
         return true;
     }
 
-    bool CRender::onmouse(unsigned int mark, unsigned int x, unsigned int y)
+    void CRender::init_shardes()
     {
-        bool rt = false;
-        if (lh_mouse_move(mark))
-        {
-            rt = _game_camera->om_mouse((int)x, (int)y);
-        }
-        return rt;
+        DELETE_PTR(_gl_shardes);
+        _gl_shardes = new lh_gl::CShardes;
+        _gl_shardes->glsharde_init();
+        _gl_shardes->uniformlocation();
     }
 
-    bool CRender::specialkeyboard(bool bchar, unsigned int uchar, unsigned int utype)
+    bool CRender::init_mesh()
     {
-        LHGL_KEY key = lh_to_glkey(bchar, uchar);
-        _game_camera->on_keyboard(key);
-        _directionallight.on_keyboard(key);
+        DELETE_PTR(_mesh)
+        glEnable(GL_DEPTH_TEST);
+        _mesh = new Mesh();
+        return _mesh->LoadMesh("..\\res\\Content\\phoenix_ugv.md2");
+    }
+
+    bool CRender::init_texture()
+    {
+        DELETE_PTR(_texture)
+        glFrontFace(GL_CW);
+        glCullFace(GL_BACK);
+        glEnable(GL_CULL_FACE);
+
+        _gl_shardes->gluniform_sampler_1i(0);
+        _texture = new Texture(GL_TEXTURE_2D, "..\\res\\Content\\timg.jpg");
+        if (!_texture->load_image())
+        {
+            return false;
+        }
         return true;
     }
+    
 }

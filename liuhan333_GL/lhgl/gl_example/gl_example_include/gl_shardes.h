@@ -1,6 +1,6 @@
 ﻿#ifndef GL_INCLUDE_GL_SHARDES_H
 #define	GL_INCLUDE_GL_SHARDES_H
-#include "lhsharde.h"
+#include "lhgl_sharde_base.h"
 #include "lhgl_lights_common.h"
 namespace lh_gl {
 
