@@ -1,7 +1,7 @@
 ﻿#ifndef LHGL_UTIL_H
 #define	LHGL_UTIL_H
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <unistd.h>
 #endif
 #include <stdlib.h>
@@ -31,7 +31,7 @@ namespace lh_gl {
 #define ZERO_MEM_VAR(var) memset(&var, 0, sizeof(var))
 #define ARRAY_SIZE_IN_ELEMENTS(a) (sizeof(a)/sizeof(a[0]))
 
-#ifdef WIN32
+#ifdef _WIN32
 #define SNPRINTF _snprintf_s
 #define VSNPRINTF vsnprintf_s
 #define RANDOM rand
