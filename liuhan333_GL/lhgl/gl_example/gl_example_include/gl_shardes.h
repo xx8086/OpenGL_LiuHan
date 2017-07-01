@@ -11,7 +11,6 @@ namespace lh_gl {
         static const unsigned int MAX_POINT_LIGHTS = 2;
         static const unsigned int MAX_SPOT_LIGHTS = 2;
         
-        //CShardes(const char*, const char*);
         CShardes();
         virtual ~CShardes();
     public:
