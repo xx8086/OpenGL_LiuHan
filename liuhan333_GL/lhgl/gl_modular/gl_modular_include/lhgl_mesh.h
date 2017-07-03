@@ -27,7 +27,6 @@ namespace lh_gl {
         }
     };
 
-
     class Mesh
     {
     public:
@@ -42,7 +41,6 @@ namespace lh_gl {
         void Clear();
 
 #define INVALID_MATERIAL 0xFFFFFFFF
-
         struct MeshEntry {
             MeshEntry();
             ~MeshEntry();

@@ -12,9 +12,7 @@ namespace lh_gl {
         ~CShadowMapFBO();
 
         bool Init(unsigned int WindowWidth, unsigned int WindowHeight);
-
         void BindForWriting();
-
         void BindForReading(GLenum TextureUnit);
 
     private:

@@ -15,7 +15,7 @@ namespace lh_gl {
         virtual ~CShardes();
     public:
         bool uniformlocation();
-        bool glsharde_init();
+        bool glsharde_init(const char* cs_vs, const char* cs_fs);
         void gluniform_world_matrix_4fv(int, GLboolean, const GLfloat*);
         void gluniform_wvp_matrix_4fv(int, GLboolean, const GLfloat*);
         void gluniform_scale_1f(const float&);

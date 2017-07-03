@@ -1,12 +1,11 @@
 ﻿#include "gl_render.h"
-#include "lhgl_pipeline.h"
 #include "lhgl_vertex_struct.h"
 #include "base_config.h"
 
 
 namespace lh_gl {
 
-    CRender::CRender()
+    CRender::CRender():CGlRenderBase()
     {}
 
     CRender::~CRender()
@@ -19,6 +18,11 @@ namespace lh_gl {
     void CRender::do_render()
     {
         render_scene_texture();
+    }
+
+    bool CRender::init()
+    { 
+        return false; 
     }
 
     void CRender::render_scene_texture()
@@ -39,86 +43,44 @@ namespace lh_gl {
 
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _gl_vertex->get_ibo());
         glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
-
-        _mesh->Render();
+        if (_mesh)
+        {
+            _mesh->Render();
+        }
 
         glDisableVertexAttribArray(0);
         glDisableVertexAttribArray(1);
         glDisableVertexAttribArray(2);
     }
 
-    void CRender::render_bypipe()
+    void CRender::render_translation(float trans)
     {
-        _fscale += 0.1f;
-        Pipeline p;
-        p.Scale(0.3f);
-        p.Rotate(_fscale, 0.0f, 0.0f);
-        p.WorldPos(0.0f, 0.0f, -5.0f);
-        p.SetPerspectiveProj(_pers_projInfo);// 设置投影变换的参数
-        p.SetCamera(*_game_camera);
-        _gl_shardes->gluniform_world_matrix_4fv(1, GL_TRUE, (const GLfloat*)p.GetWorldTrans().m);
-        _gl_shardes->gluniform_wvp_matrix_4fv(1, GL_TRUE, (const GLfloat*)p.GetWVPTrans().m);
-        _gl_shardes->gluniform_light(_directionallight);
-        _gl_shardes->gluniform_specular_reflection(_game_camera->GetPos(), 1.0, 10);
-
-
-        PointLight pl[2];
-        pl[0].DiffuseIntensity = 0.5f;
-        pl[0].Color = Vector3f(1.0f, 0.5f, 0.0f);
-        pl[0].Position = Vector3f(130.0f, 100.0f, 300 * FieldDepth * (cosf(_fscale) + 1.0f) / 2.0f);
-        pl[0].Attenuation.Linear = 10.0f;
-        pl[0].Attenuation.Exp = 2.0f;
-        pl[1].DiffuseIntensity = 0.5f;
-        pl[1].Color = Vector3f(0.0f, 0.5f, 1.0f);
-        pl[1].Position = Vector3f(7.0f, 1.0f, FieldDepth * (sinf(_fscale) + 1.0f) / 2.0f);
-        pl[1].Attenuation.Linear = 0.1f;
-        _gl_shardes->gluniform_setpointlights(2, pl);
-
-        SpotLight sl[2];
-        sl[0].DiffuseIntensity = 0.9f;
-        sl[0].Color = Vector3f(0.0f, 1.0f, 1.0f);
-        sl[0].Position = _game_camera->GetPos();
-        sl[0].Direction = _game_camera->GetTarget();
-        sl[0].Attenuation.Linear = 0.1f;
-        sl[0].Cutoff = 10.0f;
-
-        sl[1].DiffuseIntensity = 0.9f;
-        sl[1].Color = Vector3f(1.0f, 1.0f, 1.0f);
-        sl[1].Position = Vector3f(5.0f, 3.0f, 10.0f);
-        sl[1].Direction = Vector3f(0.0f, -1.0f, 0.0f);
-        sl[1].Attenuation.Linear = 0.1f;
-        sl[1].Cutoff = 20.0f;
-        _gl_shardes->gluniform_setspotlights(2, sl);
-    }
-
-    void CRender::render_translation()
-    {
-        _fscale += 0.01f;
+        //_fscale += 0.01f;
         float world[16] = {
-            1.0f, 0.0f, 0.0f, sinf(_fscale),
+            1.0f, 0.0f, 0.0f, sinf(trans),
             0.0f, 1.0f, 0.0f, 0.0f,
             0.0f, 0.0f, 1.0f, 0.0f,
             0.0f, 0.0f, 0.0f, 1.0f };
         _gl_shardes->gluniform_world_matrix_4fv(1, GL_TRUE, (const GLfloat*)world);
     }
 
-    void CRender::render_rotate()
+    void CRender::render_rotate(float rotate)
     {
-        _fscale += 0.01f;
-        float sinscale = sinf(_fscale);
-        float cosscale = cosf(_fscale);
+        //_fscale += 0.01f;
+        float sinrotate = sinf(rotate);
+        float cosrotate = cosf(rotate);
         float world[16] = {
-            cosscale,    0.0f,   -sinscale,   0.0f,
+            cosrotate,    0.0f,   -sinrotate,   0.0f,
             0.0f,        1.0f,    0.0f,       0.0f,
-            sinscale,    0.0f,    cosscale,   0.0f,
+            sinrotate,    0.0f,    cosrotate,   0.0f,
             0.0f,        0.0f,    0.0f,       1.0f };
         _gl_shardes->gluniform_world_matrix_4fv(1, GL_TRUE, (const GLfloat*)world);
     }
 
-    void CRender::render_scale()
+    void CRender::render_scale(float scale)
     {
-        _fscale += 0.01f;
-        float sinscale = sinf(_fscale);
+        //_fscale += 0.01f;
+        float sinscale = sinf(scale);
         float world[16] = {
             sinscale,   0.0f,       0.0f,       0.0f,
             0.0f,       sinscale,   0.0f,       0.0f,
@@ -127,38 +89,28 @@ namespace lh_gl {
         _gl_shardes->gluniform_world_matrix_4fv(1, GL_TRUE, (const GLfloat*)world);
     }
 
-    void CRender::render_triangle()
+    void CRender::render_triangle(float scale)
     {
-        _fscale += 0.01f;
-        _gl_shardes->gluniform_scale_1f(sinf(_fscale));
+        //_fscale += 0.01f;
+        _gl_shardes->gluniform_scale_1f(sinf(scale));
     }
 
-    bool CRender::init()
-    {
-        CGlRenderBase::init();
-        init_texture();
-        init_mesh();
-
-        return true;
-    }
-
-    void CRender::init_shardes()
+    void CRender::set_shardes(const char* vs, const char* fs)
     {
         DELETE_PTR(_gl_shardes);
         _gl_shardes = new lh_gl::CShardes;
-        _gl_shardes->glsharde_init();
-        _gl_shardes->uniformlocation();
+        _gl_shardes->glsharde_init(vs, fs);
     }
 
-    bool CRender::init_mesh()
+    bool CRender::set_mesh(const char* meshfile)
     {
         DELETE_PTR(_mesh)
         glEnable(GL_DEPTH_TEST);
         _mesh = new Mesh();
-        return _mesh->LoadMesh("..\\res\\Content\\phoenix_ugv.md2");
+        return _mesh->LoadMesh(meshfile);// ("..\\res\\Content\\phoenix_ugv.md2");
     }
 
-    bool CRender::init_texture()
+    bool CRender::set_texture(const char* imgfile)
     {
         DELETE_PTR(_texture)
         glFrontFace(GL_CW);
@@ -166,7 +118,7 @@ namespace lh_gl {
         glEnable(GL_CULL_FACE);
 
         _gl_shardes->gluniform_sampler_1i(0);
-        _texture = new Texture(GL_TEXTURE_2D, "..\\res\\Content\\timg.jpg");
+        _texture = new Texture(GL_TEXTURE_2D, imgfile);// "..\\res\\Content\\timg.jpg");
         if (!_texture->load_image())
         {
             return false;

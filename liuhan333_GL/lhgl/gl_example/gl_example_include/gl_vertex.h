@@ -11,8 +11,11 @@ namespace lh_gl {
         CGvertex();
         virtual ~CGvertex();
 
+    public:
+        bool set_indices(int, unsigned int*);
+        bool set_vertices(int, VertexText*);
     protected:
-        void create_vertex_buffer();
+        void release();
         void create_indices_buffer();
         void create_texture();
         void calc_normals(const unsigned int* pIndices, unsigned int IndexCount,
@@ -22,16 +25,10 @@ namespace lh_gl {
         GLuint _ibo = 0;
         GLuint _vbo = 0;
     private:
-        unsigned int _indices[12] = {
-            0, 3, 1,
-            1, 3, 2,
-            2, 3, 0,
-            1, 2, 0 };
-        VertexText _vertices[4] = {
-            VertexText(Vector3f(-1.0f, -1.0f, 0.5773f), Vector2f(0.0f, 0.0f)),
-            VertexText(Vector3f(0.0f, -1.0f, -1.15475f), Vector2f(0.5f, 0.0f)),
-            VertexText(Vector3f(1.0f, -1.0f, 0.5773f),  Vector2f(1.0f, 0.0f)),
-            VertexText(Vector3f(0.0f, 1.0f, 0.0f),      Vector2f(0.5f, 1.0f)) };
+        unsigned int* _indices = nullptr;
+        int _indices_nums = 0;
+        VertexText* _vertices = nullptr;
+        int _vertices_nums = 0;
     };
 }
 

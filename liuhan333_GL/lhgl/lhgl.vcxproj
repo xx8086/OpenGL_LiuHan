@@ -92,7 +92,7 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;_USRDLL;LHGL_EXPORTS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)..\include\atb\;$(SolutionDir)lh_include\;$(SolutionDir)lhgl\common_gl\common_include;$(SolutionDir)lhgl\common_gl\common_gl_include;$(SolutionDir)lhgl\gl_example\gl_example_include;$(SolutionDir)lhgl\gl_modular\gl_modular_include;$(SolutionDir)..\include\ImageMagick6;$(SolutionDir)..\include\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)..\include\glew\;$(SolutionDir)..\include\glut\;$(SolutionDir)..\include\glm\;$(SolutionDir)..\include\atb\;$(SolutionDir)lh_include\;$(SolutionDir)lhgl\common_gl\common_include;$(SolutionDir)lhgl\common_gl\common_gl_include;$(SolutionDir)lhgl\gl_example\gl_example;$(SolutionDir)lhgl\gl_example\gl_example_include;$(SolutionDir)lhgl\gl_modular\gl_modular_include;$(SolutionDir)..\include\ImageMagick6;$(SolutionDir)..\include\assimp;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -174,10 +174,12 @@
     <ClInclude Include="common_gl\common_include\base_config.h" />
     <ClInclude Include="common_gl\common_include\set_timer.h" />
     <ClInclude Include="common_gl\common_include\singleton.h" />
+    <ClInclude Include="gl_example\gl_example\gl_example.h" />
+    <ClInclude Include="gl_example\gl_example\gl_example_pyramid.h" />
+    <ClInclude Include="gl_example\gl_example\lhgl_interface.h" />
     <ClInclude Include="gl_example\gl_example_include\gl_render.h" />
     <ClInclude Include="gl_example\gl_example_include\gl_shadowmap.h" />
     <ClInclude Include="gl_example\gl_example_include\gl_shardes.h" />
-    <ClInclude Include="gl_example\gl_example_include\gl_simple_render.h" />
     <ClInclude Include="gl_example\gl_example_include\gl_vertex.h" />
     <ClInclude Include="gl_example\gl_example_include\lhgl_interface.h" />
     <ClInclude Include="gl_modular\gl_modular_include\lhgl_render_base.h" />
@@ -213,12 +215,12 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
       </PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="gl_example\gl_example_include\gl_simple_render.cpp" />
+    <ClCompile Include="gl_example\gl_example\gl_example_pyramid.cpp" />
+    <ClCompile Include="gl_example\gl_example\lhgl_interface.cpp" />
     <ClCompile Include="gl_example\gl_example_source\gl_render.cpp" />
     <ClCompile Include="gl_example\gl_example_source\gl_shadowmap.cpp" />
     <ClCompile Include="gl_example\gl_example_source\gl_shardes.cpp" />
     <ClCompile Include="gl_example\gl_example_source\gl_vertex.cpp" />
-    <ClCompile Include="gl_example\gl_example_source\lhgl_interface.cpp" />
     <ClCompile Include="gl_modular\gl_modular_source\lhgl_render_base.cpp" />
     <ClCompile Include="gl_modular\gl_modular_source\lhgl_sharde_base.cpp" />
     <ClCompile Include="gl_modular\gl_modular_source\lhgl_basic_lights.cpp" />

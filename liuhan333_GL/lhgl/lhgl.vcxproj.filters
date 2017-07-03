@@ -46,6 +46,9 @@
     <Filter Include="lh_modular\source">
       <UniqueIdentifier>{45e12adf-6af3-429f-950b-dc5d158b2326}</UniqueIdentifier>
     </Filter>
+    <Filter Include="lh_example\gl_example">
+      <UniqueIdentifier>{5a263dd5-29e5-4db4-b62c-eb79a1327661}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -96,9 +99,6 @@
     <ClInclude Include="common_gl\common_include\base_config.h">
       <Filter>common_gl\common_include</Filter>
     </ClInclude>
-    <ClInclude Include="gl_example\gl_example_include\gl_simple_render.h">
-      <Filter>lh_example\include</Filter>
-    </ClInclude>
     <ClInclude Include="gl_example\gl_example_include\gl_vertex.h">
       <Filter>lh_example\include</Filter>
     </ClInclude>
@@ -141,6 +141,15 @@
     <ClInclude Include="common_gl\common_gl_include\lhgl_vertex_struct.h">
       <Filter>common_gl\common_gl_include</Filter>
     </ClInclude>
+    <ClInclude Include="gl_example\gl_example\gl_example.h">
+      <Filter>lh_example\gl_example</Filter>
+    </ClInclude>
+    <ClInclude Include="gl_example\gl_example\gl_example_pyramid.h">
+      <Filter>lh_example\gl_example</Filter>
+    </ClInclude>
+    <ClInclude Include="gl_example\gl_example\lhgl_interface.h">
+      <Filter>lh_example\gl_example</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -182,9 +191,6 @@
     <ClCompile Include="gl_example\gl_example_source\gl_vertex.cpp">
       <Filter>lh_example\source</Filter>
     </ClCompile>
-    <ClCompile Include="gl_example\gl_example_source\lhgl_interface.cpp">
-      <Filter>lh_example\source</Filter>
-    </ClCompile>
     <ClCompile Include="gl_example\gl_example_source\gl_render.cpp">
       <Filter>lh_example\source</Filter>
     </ClCompile>
@@ -206,11 +212,14 @@
     <ClCompile Include="gl_modular\gl_modular_source\lhgl_render_base.cpp">
       <Filter>lh_modular\source</Filter>
     </ClCompile>
-    <ClCompile Include="gl_example\gl_example_include\gl_simple_render.cpp">
-      <Filter>lh_example\source</Filter>
-    </ClCompile>
     <ClCompile Include="common_gl\common_gl_source\lhgl_vertex_interface.cpp">
       <Filter>common_gl\common_gl_source</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_example\gl_example\gl_example_pyramid.cpp">
+      <Filter>lh_example\gl_example</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_example\gl_example\lhgl_interface.cpp">
+      <Filter>lh_example\gl_example</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

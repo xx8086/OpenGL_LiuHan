@@ -9,11 +9,11 @@ namespace lh_gl {
     CShardes::~CShardes()
     {}
 
-    bool CShardes::glsharde_init()
+    bool CShardes::glsharde_init(const char* cs_vs, const char* cs_fs)
     {
         assert(CLHShardes::glsharde_init());
-        set_vs_filename("..\\shardes\\shader.vs");
-        set_fs_filename("..\\shardes\\shader.fs");
+        set_vs_filename(cs_vs);//("..\\shardes\\shader.vs");
+        set_fs_filename(cs_fs); //("..\\shardes\\shader.fs");
         return true;
     }
 

@@ -29,7 +29,6 @@ namespace lh_gl {
     {
     public:
         Vector3f Direction;
-
         DirectionalLight()
         {
             Direction = Vector3f(0.0f, 0.0f, 0.0f);

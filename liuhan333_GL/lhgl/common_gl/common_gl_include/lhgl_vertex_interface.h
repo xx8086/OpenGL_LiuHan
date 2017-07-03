@@ -14,6 +14,7 @@ namespace lh_gl {
         GLuint get_ibo() const;
         GLuint get_vbo() const;
     public:
+        bool set_vert_ind_ices(int, unsigned int*, int, VertexText*);
         bool create_vertex();
     };
 }

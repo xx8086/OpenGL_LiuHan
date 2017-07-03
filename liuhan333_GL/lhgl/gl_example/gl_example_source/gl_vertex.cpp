@@ -7,36 +7,65 @@ namespace lh_gl {
     {}
 
     CGvertex::~CGvertex()
-    {}
-
-    void CGvertex::create_vertex_buffer()
     {
-        float vertices[12] = {
-            -1.0f, -1.0f, 0.5773f,
-            0.0f, -1.0f, -1.15475f,
-            1.0f, -1.0f, 0.5773f,
-            0.0f, 1.0f, 0.0f };
+        release();
+    }
 
-        glGenBuffers(1, &_vbo);
-        glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(float) * 12, vertices, GL_STATIC_DRAW);
-        _busetex = false;
+    void CGvertex::release()
+    {
+        if (nullptr != _indices)
+        {
+            delete[] _indices;
+            _indices = nullptr;
+        }
+
+        if (nullptr != _vertices)
+        {
+            delete[] _vertices;
+            _vertices = nullptr;
+        }
+    }
+
+    bool CGvertex::set_indices(int nums, unsigned int* ind)
+    {
+        if (nums < 1 || nullptr == ind)
+        {
+            return false;
+        }
+
+        _indices = new unsigned int[nums];
+        memcpy(_indices, ind, nums * sizeof(unsigned int));
+        _indices_nums = nums;
+    }
+    bool CGvertex::set_vertices(int nums, VertexText* vert)
+    {
+        if (nums < 1 || nullptr == vert)
+        {
+            return false;
+        }
+
+        _vertices = new VertexText[nums];
+        memcpy(_vertices, vert, nums * sizeof(VertexText));
+        _vertices_nums = nums;
     }
 
     void CGvertex::create_indices_buffer()
     {
         glGenBuffers(1, &_ibo);
         glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _ibo);
-        glBufferData(GL_ELEMENT_ARRAY_BUFFER, sizeof(_indices), _indices, GL_STATIC_DRAW);
+        glBufferData(GL_ELEMENT_ARRAY_BUFFER, 
+            _indices_nums * sizeof(unsigned int), 
+            _indices, GL_STATIC_DRAW);
     }
 
     void CGvertex::create_texture()
     {
-        calc_normals(_indices, ARRAY_SIZE_IN_ELEMENTS(_indices), _vertices, ARRAY_SIZE_IN_ELEMENTS(_vertices));
+        calc_normals(_indices, _indices_nums, _vertices, _vertices_nums);
 
         glGenBuffers(1, &_vbo);
         glBindBuffer(GL_ARRAY_BUFFER, _vbo);
-        glBufferData(GL_ARRAY_BUFFER, sizeof(_vertices), _vertices, GL_STATIC_DRAW);
+        glBufferData(GL_ARRAY_BUFFER, _vertices_nums * sizeof(VertexText),
+            _vertices, GL_STATIC_DRAW);
 
         _busetex = true;
     }

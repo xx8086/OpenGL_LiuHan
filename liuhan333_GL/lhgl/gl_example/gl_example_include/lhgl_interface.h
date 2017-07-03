@@ -2,9 +2,8 @@
 
 #include <Windows.h>
 #include "singleton.h"
-#include "gl_render.h"
-#include "gl_simple_render.h"
 #include "set_timer.h"
+#include "gl_example.h"
 
 namespace lh_gl_interface {
     class LhGlInterfase :
@@ -27,9 +26,8 @@ namespace lh_gl_interface {
         bool set_glcontext(HDC);
 
     private:
-        HGLRC hrc = nullptr;
         lh_time::CTimer timer;
-        lh_gl::CRender _render;
-        //lh_gl::CGlSample _render;
+        HGLRC hrc = nullptr;
+        lh_gl::CGlRenderBase* _render = nullptr;
     };
 }

@@ -15,28 +15,31 @@ namespace lh_gl {
         CRender();
         virtual ~CRender();
     public:
-        void do_render();
-        bool init();
-        
+        virtual void do_render();
+        virtual bool init();
     private:
         void render_scene_texture();
-        void render_bypipe();
-        void render_translation();
-        void render_rotate();
-        void render_scale();
-        void render_triangle();
+        void render_translation(float);
+        void render_rotate(float);
+        void render_scale(float);
+        void render_triangle(float);
 
     protected:
-        void init_shardes();
-    private:
-        bool init_texture();
-        bool init_mesh();
-        
-    private:
+        virtual void render_bypipe() {};
+        virtual void set_point_light() {};
+        virtual void set_spot_light() {};
+        virtual void set_directional_light() {};
+        virtual void set_shardes(const char* , const char*);
+    protected:
+        bool set_texture(const char*);
+        bool set_mesh(const char*);
+
+    protected:
+        CShardes* _gl_shardes = nullptr;
         float _fscale = 0.0f;
         const float FieldDepth = 20.0f;
     private:
-        CShardes* _gl_shardes = nullptr;
+        
         Texture* _texture = nullptr;
         Mesh* _mesh = nullptr;
     };

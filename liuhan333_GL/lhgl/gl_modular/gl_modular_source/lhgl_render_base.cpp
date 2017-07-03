@@ -11,52 +11,57 @@ namespace lh_gl {
         DELETE_PTR(_game_camera)
     }
 
-    void CGlRenderBase::init_projection()
+    void CGlRenderBase::set_projection(float fov, float znear, float zfat)
     {
-        _pers_projInfo.FOV = 60.0f;
-        _pers_projInfo.Height = WINDOW_HEIGHT;
         _pers_projInfo.Width = WINDOW_WIDTH;
-        _pers_projInfo.zNear = 1.0f;
-        _pers_projInfo.zFar = 100.0f;
+        _pers_projInfo.Height = WINDOW_HEIGHT;
+        _pers_projInfo.FOV = fov;// 60.0f;
+        _pers_projInfo.zNear = znear;// 1.0f;
+        _pers_projInfo.zFar = zfat;// 100.0f;
     }
 
     
     
-    void CGlRenderBase::init_camera()
+    void CGlRenderBase::set_main_camera(const Vector3f& pos, const Vector3f& target, const Vector3f& up)
     {
         DELETE_PTR(_game_camera)
         _game_camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT,
-            Vector3f(0.0f, 0.0f, -3.0f), //pos
-            Vector3f(0.0f, 0.0f, 1.0f), //target
-            Vector3f(0.0f, 1.0f, 0.0f)); //up
+            pos, //Vector3f(0.0f, 0.0f, -3.0f)
+            target, //Vector3f(0.0f, 0.0f, 1.0f)
+            up);//Vector3f(0.0f, 1.0f, 0.0f)); 
     }
 
-    void CGlRenderBase::init_light()
+    void CGlRenderBase::set_main_directionlight(const Vector3f& color, 
+        const Vector3f& direction,
+        const float ambient, 
+        const float diffuse)
     {
-        _directionallight.Color = Vector3f(1.0f, 1.0f, 1.0f);
-        _directionallight.AmbientIntensity = 0.01f;
-        _directionallight.DiffuseIntensity = 0.75f;
-        _directionallight.Direction = Vector3f(1.0f, 0.0f, 0.0f);
+        _directionallight.Color = color;// Vector3f(1.0f, 1.0f, 1.0f);
+        _directionallight.Direction = direction;// Vector3f(1.0f, 0.0f, 0.0f);
+        _directionallight.AmbientIntensity = ambient;// 0.01f;
+        _directionallight.DiffuseIntensity = diffuse;//0.75f;
     }
 
-    void CGlRenderBase::init_vertex()
+    void CGlRenderBase::set_vertex(int indices_nums, unsigned int* indices,
+        int vertices_nums, VertexText* vertices)
     {
         DELETE_PTR(_gl_vertex)
         _gl_vertex = new CGlVertexInterface;
+        _gl_vertex->set_vert_ind_ices(indices_nums, indices, vertices_nums, vertices);
         _gl_vertex->create_vertex();
     }
 
-    bool CGlRenderBase::init()
+    /*bool CGlRenderBase::init()
     {
-        init_shardes();
+       init_shardes();
 
         init_camera();
         init_light();
         init_vertex();        
         init_projection();
 
-        return true;
-    }
+        return false;
+    }*/
 
     bool CGlRenderBase::onmouse(unsigned int mark, unsigned int x, unsigned int y)
     {

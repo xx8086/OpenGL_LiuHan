@@ -21,16 +21,16 @@ namespace lh_gl {
     public:
         bool onmouse(unsigned int mark, unsigned int x, unsigned int y);
         bool specialkeyboard(bool, unsigned int, unsigned int);
-
-    public:
-        virtual bool init();
+        virtual void do_render() = 0;
+        virtual bool init() = 0;
     protected:
-        virtual void init_shardes() = 0;
-    private:
-        void init_projection();
-        void init_light();
-        void init_vertex();
-        void init_camera();
+        virtual void set_point_light() = 0;
+        virtual void set_spot_light() = 0;
+        virtual void set_directional_light() = 0;
+        virtual void set_projection(float, float, float);
+        virtual void set_main_directionlight(const Vector3f&, const Vector3f&, const float, const float);
+        virtual void set_main_camera(const Vector3f&, const Vector3f&, const Vector3f&);
+        void set_vertex(int, unsigned int*, int, VertexText*);
 
     protected:
         PersProjInfo _pers_projInfo;
