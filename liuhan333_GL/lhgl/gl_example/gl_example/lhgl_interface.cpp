@@ -3,12 +3,13 @@
 #include "GL\glew.h"
 #include "glut.h"
 #include "base_config.h"
-
+#include "gl_example.h"
 
 namespace lh_gl_interface {
     LhGlInterfase::LhGlInterfase()
     {
-        _render = new lh_gl::CRanderExPyramid;
+        //_render = new lh_gl::CRanderExPyramid;
+        _render = new lh_gl::CRanderExModelMX;
     }
 
     LhGlInterfase::~LhGlInterfase()

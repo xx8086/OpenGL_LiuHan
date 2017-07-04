@@ -1,5 +1,4 @@
 ﻿#include "gl_render.h"
-#include "lhgl_vertex_struct.h"
 #include "base_config.h"
 
 
@@ -20,37 +19,19 @@ namespace lh_gl {
         render_scene_texture();
     }
 
-    bool CRender::init()
-    { 
-        return false; 
-    }
-
     void CRender::render_scene_texture()
     {
         glClear(GL_COLOR_BUFFER_BIT  |  GL_DEPTH_BUFFER_BIT);
         render_bypipe();
 
-        glEnableVertexAttribArray(0);
-        glEnableVertexAttribArray(1);
-        glEnableVertexAttribArray(2);
-
-        glBindBuffer(GL_ARRAY_BUFFER, _gl_vertex->get_vbo());
-        glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(VertexText), 0);
-        glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(VertexText), (const GLvoid*)12);
-        glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(VertexText), (const GLvoid*)20);
-
-        _texture->bind_image(GL_TEXTURE0);
-
-        glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, _gl_vertex->get_ibo());
-        glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
-        if (_mesh)
-        {
-            _mesh->Render();
-        }
-
-        glDisableVertexAttribArray(0);
-        glDisableVertexAttribArray(1);
-        glDisableVertexAttribArray(2);
+        _gl_shardes->gl_enable();
+        
+        if (_gl_vertex)_gl_shardes->gl_drawelements(_gl_vertex->get_vbo(), _gl_vertex->get_ibo());
+        if (_texture)_texture->bind_image(GL_TEXTURE0);
+        
+        if (_mesh)_mesh->Render();
+        
+        _gl_shardes->gl_disable();
     }
 
     void CRender::render_translation(float trans)
@@ -95,19 +76,12 @@ namespace lh_gl {
         _gl_shardes->gluniform_scale_1f(sinf(scale));
     }
 
-    void CRender::set_shardes(const char* vs, const char* fs)
-    {
-        DELETE_PTR(_gl_shardes);
-        _gl_shardes = new lh_gl::CShardes;
-        _gl_shardes->glsharde_init(vs, fs);
-    }
-
     bool CRender::set_mesh(const char* meshfile)
     {
         DELETE_PTR(_mesh)
         glEnable(GL_DEPTH_TEST);
         _mesh = new Mesh();
-        return _mesh->LoadMesh(meshfile);// ("..\\res\\Content\\phoenix_ugv.md2");
+        return _mesh->LoadMesh(meshfile);
     }
 
     bool CRender::set_texture(const char* imgfile)
@@ -118,7 +92,7 @@ namespace lh_gl {
         glEnable(GL_CULL_FACE);
 
         _gl_shardes->gluniform_sampler_1i(0);
-        _texture = new Texture(GL_TEXTURE_2D, imgfile);// "..\\res\\Content\\timg.jpg");
+        _texture = new Texture(GL_TEXTURE_2D, imgfile);
         if (!_texture->load_image())
         {
             return false;

@@ -26,9 +26,7 @@ namespace lh_gl {
     {
         DELETE_PTR(_game_camera)
         _game_camera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT,
-            pos, //Vector3f(0.0f, 0.0f, -3.0f)
-            target, //Vector3f(0.0f, 0.0f, 1.0f)
-            up);//Vector3f(0.0f, 1.0f, 0.0f)); 
+            pos, target, up);
     }
 
     void CGlRenderBase::set_main_directionlight(const Vector3f& color, 
@@ -36,10 +34,10 @@ namespace lh_gl {
         const float ambient, 
         const float diffuse)
     {
-        _directionallight.Color = color;// Vector3f(1.0f, 1.0f, 1.0f);
-        _directionallight.Direction = direction;// Vector3f(1.0f, 0.0f, 0.0f);
-        _directionallight.AmbientIntensity = ambient;// 0.01f;
-        _directionallight.DiffuseIntensity = diffuse;//0.75f;
+        _directionallight.Color = color;
+        _directionallight.Direction = direction;
+        _directionallight.AmbientIntensity = ambient;
+        _directionallight.DiffuseIntensity = diffuse;
     }
 
     void CGlRenderBase::set_vertex(int indices_nums, unsigned int* indices,
@@ -50,18 +48,6 @@ namespace lh_gl {
         _gl_vertex->set_vert_ind_ices(indices_nums, indices, vertices_nums, vertices);
         _gl_vertex->create_vertex();
     }
-
-    /*bool CGlRenderBase::init()
-    {
-       init_shardes();
-
-        init_camera();
-        init_light();
-        init_vertex();        
-        init_projection();
-
-        return false;
-    }*/
 
     bool CGlRenderBase::onmouse(unsigned int mark, unsigned int x, unsigned int y)
     {

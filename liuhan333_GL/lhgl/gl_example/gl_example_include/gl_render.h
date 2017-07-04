@@ -16,7 +16,7 @@ namespace lh_gl {
         virtual ~CRender();
     public:
         virtual void do_render();
-        virtual bool init();
+        virtual bool init() { return false; };
     private:
         void render_scene_texture();
         void render_translation(float);
@@ -29,13 +29,13 @@ namespace lh_gl {
         virtual void set_point_light() {};
         virtual void set_spot_light() {};
         virtual void set_directional_light() {};
-        virtual void set_shardes(const char* , const char*);
+        virtual void set_shardes(const char*, const char*){};
     protected:
         bool set_texture(const char*);
         bool set_mesh(const char*);
 
     protected:
-        CShardes* _gl_shardes = nullptr;
+        CLHShardes* _gl_shardes = nullptr;
         float _fscale = 0.0f;
         const float FieldDepth = 20.0f;
     private:

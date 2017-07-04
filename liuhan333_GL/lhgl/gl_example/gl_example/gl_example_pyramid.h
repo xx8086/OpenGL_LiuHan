@@ -18,8 +18,8 @@ namespace lh_gl {
         virtual void set_directional_light();
         virtual void set_shardes(const char*, const char*);
     public:
-        void do_render();
-        bool init();
+        virtual void do_render();
+        virtual bool init();
     };
 }
 #endif

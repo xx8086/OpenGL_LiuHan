@@ -1,5 +1,6 @@
 #include "gl_example_pyramid.h"
 #include "lhgl_pipeline.h"
+#include "base_config.h"
 
 namespace lh_gl {
 
@@ -17,9 +18,9 @@ namespace lh_gl {
         p.SetCamera(*_game_camera);
         _gl_shardes->gluniform_world_matrix_4fv(1, GL_TRUE, (const GLfloat*)p.GetWorldTrans().m);
         _gl_shardes->gluniform_wvp_matrix_4fv(1, GL_TRUE, (const GLfloat*)p.GetWVPTrans().m);
-        _gl_shardes->gluniform_light(_directionallight);
         _gl_shardes->gluniform_specular_reflection(_game_camera->GetPos(), 1.0, 10);
 
+        set_directional_light();
         set_point_light();
         set_spot_light();
     }
@@ -35,6 +36,7 @@ namespace lh_gl {
         set_main_camera(Vector3f(0.0f, 0.0f, -7.0f),
 		Vector3f(0.0f, 0.0f, 1.0f),
 		Vector3f(0.0f, 1.0f, 0.0f)); 
+        set_projection(60.0f, 1.0f, 100.0f);
         set_main_directionlight(Vector3f(1.0f, 1.0f, 1.0f),
             Vector3f(1.0f, 0.0f, 0.0f),
             0.01f,
@@ -51,10 +53,8 @@ namespace lh_gl {
         VertexText(Vector3f(1.0f, -1.0f, 0.5773f),  Vector2f(1.0f, 0.0f)),
         VertexText(Vector3f(0.0f, 1.0f, 0.0f),      Vector2f(0.5f, 1.0f)) };
         set_vertex(12, _indices, 4, _vertices);
-
-        set_projection(60.0f, 1.0f, 100.0f);
         set_texture("..\\res\\Content\\timg.jpg");
-        //set_mesh("..\\res\\Content\\phoenix_ugv.md2");
+       // set_mesh("..\\res\\Content\\phoenix_ugv.md2");
         return true;
     }
     void CRanderExPyramid::set_point_light()
@@ -92,11 +92,15 @@ namespace lh_gl {
 	}
 
     void CRanderExPyramid::set_directional_light()
-    {}
+    {
+        _gl_shardes->gluniform_directionlight(_directionallight);
+    }
 
     void CRanderExPyramid::set_shardes(const char* vs, const char* fs)
     {
-        CRender::set_shardes(vs, fs);
+        DELETE_PTR(_gl_shardes);
+        _gl_shardes = new lh_gl::CShardes;
+        _gl_shardes->glsharde_init(vs, fs);
         _gl_shardes->uniformlocation();
     }
 }

@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include "singleton.h"
 #include "set_timer.h"
-#include "gl_example.h"
+#include "lhgl_render_base.h"
 
 namespace lh_gl_interface {
     class LhGlInterfase :
