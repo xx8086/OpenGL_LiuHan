@@ -16,7 +16,6 @@ namespace lh_gl {
         virtual void set_point_light();
         virtual void set_spot_light();
         virtual void set_directional_light();
-        virtual void set_shardes(const char*, const char*);
     public:
         virtual void do_render();
         virtual bool init();

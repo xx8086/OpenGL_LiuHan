@@ -28,7 +28,7 @@ namespace lh_gl {
             m_blob.data());
         glTexParameterf(m_textureTarget, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
         glTexParameterf(m_textureTarget, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
-        //glBindTexture(m_textureTarget, 0);
+        glBindTexture(m_textureTarget, 0);
         return true;
     }
 

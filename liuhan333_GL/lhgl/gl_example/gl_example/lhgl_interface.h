@@ -24,7 +24,7 @@ namespace lh_gl_interface {
     private:
         bool set_pixel(HDC);
         bool set_glcontext(HDC);
-
+        void release_rand();
     private:
         lh_time::CTimer timer;
         HGLRC hrc = nullptr;

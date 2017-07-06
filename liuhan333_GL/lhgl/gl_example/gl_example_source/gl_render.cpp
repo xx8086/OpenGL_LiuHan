@@ -1,6 +1,4 @@
 ﻿#include "gl_render.h"
-#include "base_config.h"
-
 
 namespace lh_gl {
 
@@ -84,6 +82,13 @@ namespace lh_gl {
         return _mesh->LoadMesh(meshfile);
     }
 
+    bool CRender::set_mesh(Mesh*&  moremesh, const char* meshfile)
+    {
+        glEnable(GL_DEPTH_TEST);
+        moremesh = new Mesh();
+        return moremesh->LoadMesh(meshfile);
+    }
+
     bool CRender::set_texture(const char* imgfile)
     {
         DELETE_PTR(_texture)
@@ -99,5 +104,4 @@ namespace lh_gl {
         }
         return true;
     }
-    
 }

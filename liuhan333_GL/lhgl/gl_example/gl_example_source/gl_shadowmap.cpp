@@ -20,7 +20,39 @@ namespace lh_gl {
         }
     }
 
-    bool CShadowMapFBO::Init(unsigned int width, unsigned int height)
+    bool CShadowMapFBO::gl_enable()
+    {
+        return CShardes::gl_enable();
+    }
+    bool CShadowMapFBO::gl_disable()
+    {
+        return CShardes::gl_disable();
+    }
+    bool CShadowMapFBO::gl_drawelements(GLuint, GLuint)
+    {
+        glBindFramebuffer(GL_FRAMEBUFFER, 0);
+        return true;
+    }
+
+    bool CShadowMapFBO::uniformlocation_base()
+    {
+        _wvp_location = get_uniformlocation(_shader_program, "gWVP");
+        _texture_location = get_uniformlocation(_shader_program, "gShadowMap");
+
+        if (_wvp_location == INVALID_UNIFORM_LOCATION ||
+            _texture_location == INVALID_UNIFORM_LOCATION) {
+            return false;
+        }
+    }
+
+    bool CShadowMapFBO::uniformlocation()
+    {
+        assert(compile_shaders(_shader_program));
+        uniformlocation_base();
+        return true;
+    }
+
+    bool CShadowMapFBO::init(unsigned int width, unsigned int height)
     {
         // Create the FBO
         glGenFramebuffers(1, &_fbo);
@@ -52,15 +84,25 @@ namespace lh_gl {
     }
 
 
-    void CShadowMapFBO::BindForWriting()
+    void CShadowMapFBO::bindfoewriting()
     {
         glBindFramebuffer(GL_DRAW_FRAMEBUFFER, _fbo);
     }
 
 
-    void CShadowMapFBO::BindForReading(GLenum TextureUnit)
+    void CShadowMapFBO::bindtexture(GLenum TextureUnit)
     {
         glActiveTexture(TextureUnit);
         glBindTexture(GL_TEXTURE_2D, _shadow_map);
+    }
+
+    void CShadowMapFBO::se_wvp(const Matrix4f& _wvp)
+    {
+        glUniformMatrix4fv(_wvp_location, 1, GL_TRUE, (const GLfloat*)_wvp.m);
+    }
+
+    void CShadowMapFBO::set_textureunit(unsigned int _tu)
+    {
+        glUniform1i(_texture_location, _tu);
     }
 }

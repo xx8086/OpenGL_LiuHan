@@ -37,7 +37,7 @@ namespace lh_gl {
         bool uniform_point_lights_location();
         bool uniform_spot_lights_location();
         bool uniform_direction_lights_location();
-        bool uniformlocation_base();
+        virtual bool uniformlocation_base();
     private:
         void set_vs_filename(const char*);
         void set_fs_filename(const char*);

@@ -8,11 +8,15 @@
 namespace lh_gl_interface {
     LhGlInterfase::LhGlInterfase()
     {
-        //_render = new lh_gl::CRanderExPyramid;
-        _render = new lh_gl::CRanderExModelMX;
+        _render = get_rend();
     }
 
     LhGlInterfase::~LhGlInterfase()
+    {
+        release_rand();
+    }
+
+    void LhGlInterfase::release_rand()
     {
         if (nullptr != _render)
         {

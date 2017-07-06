@@ -15,9 +15,9 @@ namespace lh_gl {
     {
         _pers_projInfo.Width = WINDOW_WIDTH;
         _pers_projInfo.Height = WINDOW_HEIGHT;
-        _pers_projInfo.FOV = fov;// 60.0f;
-        _pers_projInfo.zNear = znear;// 1.0f;
-        _pers_projInfo.zFar = zfat;// 100.0f;
+        _pers_projInfo.FOV = fov;
+        _pers_projInfo.zNear = znear;
+        _pers_projInfo.zFar = zfat;
     }
 
     

@@ -153,6 +153,9 @@
     <ClInclude Include="gl_example\gl_example\gl_example_model_mx.h">
       <Filter>lh_example\gl_example</Filter>
     </ClInclude>
+    <ClInclude Include="gl_example\gl_example\gl_example_shadowmap.h">
+      <Filter>lh_example\gl_example</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -225,6 +228,9 @@
       <Filter>lh_example\gl_example</Filter>
     </ClCompile>
     <ClCompile Include="gl_example\gl_example\gl_example_model_mx.cpp">
+      <Filter>lh_example\gl_example</Filter>
+    </ClCompile>
+    <ClCompile Include="gl_example\gl_example\gl_example_shadowmap.cpp">
       <Filter>lh_example\gl_example</Filter>
     </ClCompile>
   </ItemGroup>

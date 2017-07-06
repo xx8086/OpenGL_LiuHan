@@ -177,6 +177,7 @@
     <ClInclude Include="gl_example\gl_example\gl_example.h" />
     <ClInclude Include="gl_example\gl_example\gl_example_model_mx.h" />
     <ClInclude Include="gl_example\gl_example\gl_example_pyramid.h" />
+    <ClInclude Include="gl_example\gl_example\gl_example_shadowmap.h" />
     <ClInclude Include="gl_example\gl_example\lhgl_interface.h" />
     <ClInclude Include="gl_example\gl_example_include\gl_render.h" />
     <ClInclude Include="gl_example\gl_example_include\gl_shadowmap.h" />
@@ -218,6 +219,7 @@
     </ClCompile>
     <ClCompile Include="gl_example\gl_example\gl_example_model_mx.cpp" />
     <ClCompile Include="gl_example\gl_example\gl_example_pyramid.cpp" />
+    <ClCompile Include="gl_example\gl_example\gl_example_shadowmap.cpp" />
     <ClCompile Include="gl_example\gl_example\lhgl_interface.cpp" />
     <ClCompile Include="gl_example\gl_example_source\gl_render.cpp" />
     <ClCompile Include="gl_example\gl_example_source\gl_shadowmap.cpp" />

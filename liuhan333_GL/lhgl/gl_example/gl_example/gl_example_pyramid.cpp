@@ -32,14 +32,14 @@ namespace lh_gl {
 
     bool CRanderExPyramid::init()
     {
-        set_shardes("..\\shardes\\shader.vs", "..\\shardes\\shader.fs");
-        set_main_camera(Vector3f(0.0f, 0.0f, -7.0f),
+        set_shardes<lh_gl::CShardes>("..\\shardes\\shader.vs", "..\\shardes\\shader.fs");
+        set_main_camera(Vector3f(0.0f, 0.0f, -70.0f),
 		Vector3f(0.0f, 0.0f, 1.0f),
 		Vector3f(0.0f, 1.0f, 0.0f)); 
         set_projection(60.0f, 1.0f, 100.0f);
         set_main_directionlight(Vector3f(1.0f, 1.0f, 1.0f),
             Vector3f(1.0f, 0.0f, 0.0f),
-            0.01f,
+            1.45f,
             0.75f);
 
         unsigned int _indices[12] = {
@@ -96,11 +96,4 @@ namespace lh_gl {
         _gl_shardes->gluniform_directionlight(_directionallight);
     }
 
-    void CRanderExPyramid::set_shardes(const char* vs, const char* fs)
-    {
-        DELETE_PTR(_gl_shardes);
-        _gl_shardes = new lh_gl::CShardes;
-        _gl_shardes->glsharde_init(vs, fs);
-        _gl_shardes->uniformlocation();
-    }
 }
